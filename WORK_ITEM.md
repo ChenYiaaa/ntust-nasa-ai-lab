@@ -72,11 +72,19 @@ STUDENT-MAIN Brain 正式驗收 `WO-M0-001` 為 `PASS`。`WO-M0-002` 依 MAIN Br
 | TYPE | `BRAIN_TO_BRAIN_WORK_ORDER` |
 | ASSIGNEE / RESPONSIBLE_BRAIN | STUDENT-RESEARCH Brain |
 | OWNER_APPROVAL | `GRANTED` |
-| STATUS | `AUTHORIZED_NOT_STARTED` |
-| RESEARCH_WORKER | `NOT_DISPATCHED` |
-| GATE_A | `NOT_STARTED` |
-| GATE_B | `NOT_STARTED` |
-| GATE_C | `NOT_STARTED` |
+| STATUS | `PASS` |
+| RESEARCH_DECISION | `PASS` |
+| MAIN_DECISION | `PASS` |
+| RESEARCH_WORKER | `COMPLETED_AND_STOPPED` |
+| GATE_A | `PASS` |
+| GATE_B | `PASS` |
+| GATE_C | `PASS` |
+| DATA_CONTRACT_VERSION | `1.0.0` |
+| ACCEPTED_COMMIT_GATE_A | `c47df8eebf95e1b6d487e81c657863e65a170564` |
+| ACCEPTED_COMMIT_GATE_B | `ac4f97b220a6ec895c6cc0f18782190fefb45a82` |
+| ACCEPTED_COMMIT_GATE_C | `b09981561028345fd5f66bfd8b158200f3cca3b9` |
+| GATE_C_RESEARCH_ACCEPTANCE | `PASS` |
+| GATE_C_MAIN_ACCEPTANCE | `PASS` |
 
 - **OBJECTIVE** — 先驗證本地三份 NASA C-MAPSS FD001 TXT，通過後執行 Trend / Quality Analysis，最後交付可追溯的 Data Contract。
 - **INPUT** — `train_FD001.txt`、`test_FD001.txt`、`RUL_FD001.txt`。
@@ -84,7 +92,29 @@ STUDENT-MAIN Brain 正式驗收 `WO-M0-001` 為 `PASS`。`WO-M0-002` 依 MAIN Br
 - **STOP_IF** — 最新治理文件無法核對、前置治理同步尚未通過驗收、任一授權輸入無法驗證、前一 Gate 未通過，或需要修改或發布未授權的原始資料。
 - **RETURN_TO** — STUDENT-MAIN Brain。
 
-STUDENT-RESEARCH Brain 須先核對 GitHub `main` 上的最新治理文件，再依授權自行向其 RESEARCH Own Worker 派工。
+**派工規則** — M2 派工前，由 STUDENT-RESEARCH Brain 核對 GitHub `main` 上的最新治理文件，再依授權自行向其 RESEARCH Own Worker 派工。
+
+### ACCEPTANCE_EVIDENCE
+
+- MAIN Brain 已獨立讀取 GitHub 的 Gate A／B／C Commit 並核對遠端 `main` SHA，確認研究交付範圍符合授權。
+- 來源 SHA-256 與報告一致。FD001 Data Contract `1.0.0` 已審查，包含 6 項操作及 6 個錯誤碼。
+- Gate C Worker 的 35 項檢查全部通過。Research Brain Acceptance 與 MAIN Brain Final Acceptance 均為 `PASS`。
+
+### ACCEPTANCE_LIMITATION
+
+- MAIN Brain 未直接重跑私人原始 TXT。最終驗收依據為 GitHub 交付物、Worker 執行證據及 Research 驗收。
+- RUL 映射依已文件化的 `MW_FD001_SORTED_ID` 慣例。公開產物是保護隱私的摘要。
+- 原始 Data Contract JSON 的 `research_github_evidence.gate_c` 欄位保留交付當時的 `PENDING_BRAIN_ACCEPTANCE` 狀態。
+- **CANONICAL_ACCEPTANCE_RECORD** — `WO-M2-001` 通過 MAIN Brain 遠端驗收後，以 GitHub `main` 治理文件為正式最終驗收紀錄。
+
+### M3_RELEASE_CONDITION
+
+M3 狀態為 `NOT_STARTED`，學生授權為 `NOT_GRANTED`，派工為 `NOT_AUTHORIZED`。開始 M3 前須依序完成下列事項。
+
+1. MAIN Brain 驗收 `WO-M2-001` 為 `PASS`。
+2. 核對 GitHub `main` 最新治理文件。
+3. STUDENT 正式授權 M3。
+4. MAIN Brain 正式指派 Web Brain。
 
 ## 後續工作單必填欄位
 

@@ -31,22 +31,30 @@
 
 ## M2 — NASA C-MAPSS FD001 DATA INTEGRATION
 
-- **Status** — `AUTHORIZED_NOT_STARTED`。
+- **Status** — `PASS`。
 - **Work Item ID** — `M2_FD001_DATA_CONTRACT_V1`。
 - **Owner Approval** — `GRANTED`。
-- **Research Worker** — `NOT_DISPATCHED`。
-- **Gate A / Gate B / Gate C** — 均為 `NOT_STARTED`。
+- **Research Decision / MAIN Decision** — `PASS` / `PASS`。
+- **GATE_A_RAW_VALIDATION / GATE_B_TREND_QUALITY / GATE_C_DATA_CONTRACT** — `PASS` / `PASS` / `PASS`。
+- **ACCEPTED_COMMITS** — Gate A `c47df8eebf95e1b6d487e81c657863e65a170564`、Gate B `ac4f97b220a6ec895c6cc0f18782190fefb45a82`、Gate C `b09981561028345fd5f66bfd8b158200f3cca3b9`。
+- **CONTRACT_SCHEMA_VERSION** — `1.0.0`。
+- **GATE_C_RESEARCH_ACCEPTANCE / GATE_C_MAIN_ACCEPTANCE** — `PASS` / `PASS`。
+- **ACCEPTANCE_SCOPE** — 三份本地 FD001 TXT。Train 20,631 列、Test 13,096 列、RUL 100 列。Train 與 Test 各 26 欄、各 100 個 Unit，共 21 個 Sensor。來源 SHA-256 已固定，Raw Locator 已驗證。Train／Test／RUL 資料語意、感測器趨勢、資料品質、Data Contract 操作及 Error Contract 均已審查。Research 與 MAIN 的正式驗收均為 `PASS`。
+- **ACCEPTANCE_LIMITATIONS** — MAIN Brain 未親自重新執行本地私人 TXT。驗收依據為 GitHub 遠端交付物、Worker 執行證據及 Research 驗收。RUL 映射依 `MW_FD001_SORTED_ID` 慣例。Gate C Contract JSON 的 `PENDING_BRAIN_ACCEPTANCE` 是原始交付快照的狀態。
+- **CANONICAL_ACCEPTANCE_RECORD** — `WO-M2-001` 通過 MAIN Brain 遠端驗收後，以 GitHub `main` 治理文件為正式最終驗收紀錄。
 - **Goal** — 接入學生本地 NASA C-MAPSS FD001 真實資料，建立 Engine Unit、Cycle、Sensor 索引與來源追溯。
 - **Input** — 學生授權的本地 FD001 檔案、資料規格與 M1 驗收紀錄。
 - **Deliverables** — 可重現的 FD001 資料讀取方式、欄位與索引對照、來源清單及抽樣驗證證據。
 - **Responsible Brain** — RESEARCH Brain。
 - **Acceptance Criteria** — 可依 Engine Unit、Cycle 與 Sensor 找到對應讀值。以本地資料抽樣比對讀值、欄位映射及資料分組，並記錄來源與驗證方式。
 - **STOP_IF** — 檔案或資料規格無法確認、索引或讀值與來源不一致，或作業涉及未授權的資料修改或發布。
-- **Next Role** — RESEARCH Brain 驗收後回報 STUDENT-MAIN Brain，由 MAIN Brain 於核准後派發 M3。
+- **Next Role** — 等待 STUDENT-MAIN Brain 完成 `WO-M2-001` 遠端驗收，再由 STUDENT 決定是否授權 M3。
 
 ## M3 — HEALTH ANALYSIS WEBSITE MVP
 
 - **Status** — `NOT_STARTED`。
+- **OWNER_APPROVAL** — `NOT_GRANTED`。
+- **DISPATCH** — `NOT_AUTHORIZED`。
 - **Goal** — 建立網站，讓使用者選擇 Engine Unit、Cycle 與 Sensor，查看真實感測器趨勢及資料來源。
 - **Input** — M2 已驗收的 FD001 介面、欄位索引、資料來源紀錄及授權的網站工作範圍。
 - **Deliverables** — 可啟動的網站 MVP、選取介面、感測器趨勢、來源呈現與操作驗證證據。
