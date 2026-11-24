@@ -1,0 +1,3 @@
+Reran outputs/M2_FD001_DATA_CONTRACT_V1/gate_b/PUBLIC_SAFE/analyze.py with --output set to a new ignored local directory.
+Compared exact relative paths and bytes of all 7 JSON artifacts against local_only/run.
+Analysis exit_code=0; JSON comparison exit_code=0.

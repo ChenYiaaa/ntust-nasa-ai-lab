@@ -1,0 +1,6 @@
+command=python outputs/M2_FD001_DATA_CONTRACT_V1/gate_b/PUBLIC_SAFE/analyze.py --output outputs/M2_FD001_DATA_CONTRACT_V1/gate_b/local_only/run
+Python 3.12.14 / NumPy 2.3.5
+train: rows=20631 units=100 trends=2100 missing=0 duplicates=0 examples=2
+test: rows=13096 units=100 trends=2100 missing=0 duplicates=0 examples=2
+Independent checks passed=5022; all three source hashes unchanged
+exit_code=0

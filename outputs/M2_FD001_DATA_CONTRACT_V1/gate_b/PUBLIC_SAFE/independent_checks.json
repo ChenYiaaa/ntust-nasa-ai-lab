@@ -1,0 +1,21 @@
+{
+  "total": 5022,
+  "passed": 5022,
+  "failed": 0,
+  "passed_by_category": {
+    "other": 606,
+    "continuity": 200,
+    "slope": 4200,
+    "locator": 16
+  },
+  "relative_tolerance": 1e-10,
+  "absolute_tolerance": 1e-12,
+  "local_detail_fields": [
+    "check_name",
+    "expected",
+    "actual",
+    "status",
+    "error",
+    "method"
+  ]
+}

@@ -1,0 +1,130 @@
+{
+  "train": [
+    {
+      "dataset_id": "FD001",
+      "split": "train",
+      "unit_id": 1,
+      "sensor_id": 1,
+      "cycle_start": 1,
+      "cycle_end": 192,
+      "observation_count": 192,
+      "missing_count": 0,
+      "minimum": 518.67,
+      "maximum": 518.67,
+      "mean": 518.67,
+      "standard_deviation": 0.0,
+      "trend_slope": 0.0,
+      "slope_reason": null,
+      "slope_method": "OLS with intercept; centered Cycle and Sensor covariance divided by centered Cycle sum of squares",
+      "sensor_unit": "UNKNOWN",
+      "slope_unit": "UNKNOWN / Cycle",
+      "source_file_sha256": "963b5e22825b34d8b21c69e1aeb4af3e647050eb672ee8834ba4b5d91d2de0f8",
+      "verification_status": "PASS",
+      "source_record_references": {
+        "lookup_key": [
+          "split",
+          "unit_id",
+          "cycle",
+          "sensor_id"
+        ],
+        "count": 192,
+        "locator": "Gate A PUBLIC_SAFE/validate.py --locate; column_position=sensor_id+5"
+      }
+    },
+    {
+      "dataset_id": "FD001",
+      "split": "train",
+      "unit_id": 1,
+      "sensor_id": 2,
+      "cycle_start": 1,
+      "cycle_end": 192,
+      "observation_count": 192,
+      "missing_count": 0,
+      "minimum": 641.71,
+      "maximum": 644.21,
+      "mean": 642.6210416666667,
+      "standard_deviation": 0.48679522376234896,
+      "trend_slope": 0.006073603613379281,
+      "slope_reason": null,
+      "slope_method": "OLS with intercept; centered Cycle and Sensor covariance divided by centered Cycle sum of squares",
+      "sensor_unit": "UNKNOWN",
+      "slope_unit": "UNKNOWN / Cycle",
+      "source_file_sha256": "963b5e22825b34d8b21c69e1aeb4af3e647050eb672ee8834ba4b5d91d2de0f8",
+      "verification_status": "PASS",
+      "source_record_references": {
+        "lookup_key": [
+          "split",
+          "unit_id",
+          "cycle",
+          "sensor_id"
+        ],
+        "count": 192,
+        "locator": "Gate A PUBLIC_SAFE/validate.py --locate; column_position=sensor_id+5"
+      }
+    }
+  ],
+  "test": [
+    {
+      "dataset_id": "FD001",
+      "split": "test",
+      "unit_id": 1,
+      "sensor_id": 1,
+      "cycle_start": 1,
+      "cycle_end": 31,
+      "observation_count": 31,
+      "missing_count": 0,
+      "minimum": 518.67,
+      "maximum": 518.67,
+      "mean": 518.67,
+      "standard_deviation": 0.0,
+      "trend_slope": 0.0,
+      "slope_reason": null,
+      "slope_method": "OLS with intercept; centered Cycle and Sensor covariance divided by centered Cycle sum of squares",
+      "sensor_unit": "UNKNOWN",
+      "slope_unit": "UNKNOWN / Cycle",
+      "source_file_sha256": "3cda7109ce17bafb5443f2ac926cfcf88154b941b8c4cf95eb55d1ddd6f52851",
+      "verification_status": "PASS",
+      "source_record_references": {
+        "lookup_key": [
+          "split",
+          "unit_id",
+          "cycle",
+          "sensor_id"
+        ],
+        "count": 31,
+        "locator": "Gate A PUBLIC_SAFE/validate.py --locate; column_position=sensor_id+5"
+      }
+    },
+    {
+      "dataset_id": "FD001",
+      "split": "test",
+      "unit_id": 1,
+      "sensor_id": 2,
+      "cycle_start": 1,
+      "cycle_end": 31,
+      "observation_count": 31,
+      "missing_count": 0,
+      "minimum": 641.71,
+      "maximum": 643.02,
+      "mean": 642.3190322580647,
+      "standard_deviation": 0.2994144823786262,
+      "trend_slope": 0.0014758064516130279,
+      "slope_reason": null,
+      "slope_method": "OLS with intercept; centered Cycle and Sensor covariance divided by centered Cycle sum of squares",
+      "sensor_unit": "UNKNOWN",
+      "slope_unit": "UNKNOWN / Cycle",
+      "source_file_sha256": "3cda7109ce17bafb5443f2ac926cfcf88154b941b8c4cf95eb55d1ddd6f52851",
+      "verification_status": "PASS",
+      "source_record_references": {
+        "lookup_key": [
+          "split",
+          "unit_id",
+          "cycle",
+          "sensor_id"
+        ],
+        "count": 31,
+        "locator": "Gate A PUBLIC_SAFE/validate.py --locate; column_position=sensor_id+5"
+      }
+    }
+  ]
+}
