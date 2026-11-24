@@ -1,0 +1,18 @@
+{
+  "work_item_id": "M1_DATASET_PROFILE_6CSV_V1",
+  "dataset_count": 1,
+  "record_count": 6,
+  "scope": "RESEARCH Brain confirmed all six data records of this file constitute one dataset.",
+  "record_locator": "1-based logical CSV record after the header, inclusive range 1 through 6.",
+  "path_base": "repository root",
+  "datasets": [
+    {
+      "dataset_id": "synthetic_sensor",
+      "filename": "synthetic_sensor.csv",
+      "resolved_path": "data/synthetic_sensor.csv",
+      "source_file_sha256": "cd536b46eb628909fdc986bbad956c24a2e50afb287968998374befc62204377",
+      "size_bytes": 234,
+      "read_status": "READ_OK"
+    }
+  ]
+}

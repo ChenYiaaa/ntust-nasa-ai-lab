@@ -1,0 +1,121 @@
+[
+  {
+    "dataset_id": "synthetic_sensor",
+    "filename": "synthetic_sensor.csv",
+    "resolved_path": "data/synthetic_sensor.csv",
+    "source_file_sha256": "cd536b46eb628909fdc986bbad956c24a2e50afb287968998374befc62204377",
+    "size_bytes": 234,
+    "read_status": "READ_OK",
+    "row_count": 6,
+    "column_count": 4,
+    "column_names": [
+      "timestamp",
+      "load_pct",
+      "coolant_out_c",
+      "oil_pressure_bar"
+    ],
+    "read_csv_dtypes": {
+      "timestamp": "str",
+      "load_pct": "int64",
+      "coolant_out_c": "int64",
+      "oil_pressure_bar": "float64"
+    },
+    "column_dtypes": {
+      "timestamp": "datetime64[us]",
+      "load_pct": "int64",
+      "coolant_out_c": "int64",
+      "oil_pressure_bar": "float64"
+    },
+    "missing_count_per_column": {
+      "timestamp": 0,
+      "load_pct": 0,
+      "coolant_out_c": 0,
+      "oil_pressure_bar": 1
+    },
+    "duplicate_row_count": 1,
+    "numeric_summary": {
+      "load_pct": {
+        "count": 6,
+        "mean": 63.333333333333336,
+        "standard_deviation": 10.327955589886445,
+        "minimum": 50.0,
+        "median": 70.0,
+        "maximum": 70.0
+      },
+      "coolant_out_c": {
+        "count": 6,
+        "mean": 81.66666666666667,
+        "standard_deviation": 2.581988897471611,
+        "minimum": 78.0,
+        "median": 82.5,
+        "maximum": 84.0
+      },
+      "oil_pressure_bar": {
+        "count": 5,
+        "mean": 3.9,
+        "standard_deviation": 0.10000000000000009,
+        "minimum": 3.8,
+        "median": 3.9,
+        "maximum": 4.0
+      }
+    },
+    "categorical_summary": "NOT_APPLICABLE",
+    "data_quality_flags": {
+      "constant_columns": [],
+      "all_null_columns": [],
+      "duplicate_rows": 1,
+      "invalid_values": {
+        "timestamp": 0,
+        "load_pct": 0,
+        "coolant_out_c": 0,
+        "oil_pressure_bar": 0
+      },
+      "other_confirmed_anomalies": {
+        "repeated_nonmissing_timestamps_beyond_first": 1
+      }
+    },
+    "structure_analysis": {
+      "engine_unit": "NOT_APPLICABLE",
+      "unique_units": "NOT_APPLICABLE",
+      "cycle": "NOT_APPLICABLE",
+      "cycle_range": "NOT_APPLICABLE",
+      "health_label": "NOT_APPLICABLE",
+      "rul": "NOT_APPLICABLE",
+      "timestamp": "timestamp",
+      "timestamp_unique_nonmissing": 5,
+      "sensor_columns": [
+        "load_pct",
+        "coolant_out_c",
+        "oil_pressure_bar"
+      ],
+      "sensor_count": 3,
+      "sensor_count_basis": "Numeric telemetry fields, including load_pct; physical device count is unknown.",
+      "sensor_missing_cells": 1,
+      "sensor_cells": 18,
+      "sensor_missing_rate": 0.05555555555555555,
+      "sensor_missing_rate_per_column": {
+        "load_pct": 0.0,
+        "coolant_out_c": 0.0,
+        "oil_pressure_bar": 0.16666666666666666
+      },
+      "sensor_value_range": {
+        "load_pct": [
+          50.0,
+          70.0
+        ],
+        "coolant_out_c": [
+          78.0,
+          84.0
+        ],
+        "oil_pressure_bar": [
+          3.8,
+          4.0
+        ]
+      }
+    },
+    "errors_or_warnings": [
+      "1 duplicate row(s) retained.",
+      "1 missing cell(s) retained."
+    ]
+  }
+]

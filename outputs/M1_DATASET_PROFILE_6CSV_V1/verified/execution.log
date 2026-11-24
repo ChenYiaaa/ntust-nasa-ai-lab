@@ -1,0 +1,8 @@
+command=python outputs/M1_DATASET_PROFILE_6CSV_V1/verified/profile_sensor.py
+Python 3.12.14 / pandas 3.0.1
+source=data/synthetic_sensor.csv bytes=234 sha256=cd536b46eb628909fdc986bbad956c24a2e50afb287968998374befc62204377
+datasets=1 rows=6 columns=4
+missing=1 duplicate_rows=1
+Checks passed: source identity and stable bytes, record scope, schema, shape, missingness,
+timestamps, duplicates and every numeric statistic against independent standard-library calculations.
+exit_code=0
