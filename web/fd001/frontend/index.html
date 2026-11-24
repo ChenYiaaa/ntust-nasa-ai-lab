@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FD001 Health Analysis</title>
+  <link rel="stylesheet" href="/style.css">
+  <script type="module" src="/app.mjs"></script>
+</head>
+<body>
+  <header><div class="shell mast"><div><small>NASA C-MAPSS / FD001</small><h1>Health Analysis</h1></div><span id="service">Connecting</span></div></header>
+  <main class="shell">
+    <form id="query" aria-label="Sensor query" novalidate>
+      <div class="controls">
+        <label>Dataset split<select id="split" disabled><option value="">Select split</option></select></label>
+        <label>Engine unit<select id="unit" disabled><option value="">Select unit</option></select></label>
+        <label>Sensor<select id="sensor" disabled><option value="">Select sensor</option></select></label>
+        <label>Start cycle<input id="start" type="number" min="1" step="1" aria-describedby="bounds" disabled></label>
+        <label>End cycle<input id="end" type="number" min="1" step="1" aria-describedby="bounds" disabled></label>
+        <button id="run" disabled>Query history</button>
+      </div>
+      <p id="bounds">Select an engine unit to confirm its Cycle range.</p>
+    </form>
+    <p id="status" role="status" aria-live="polite">Loading verified service and sensor catalog…</p>
+    <div id="results" hidden>
+      <section class="panel"><h2>Sensor trend</h2><p id="selection"></p>
+        <div class="plot"><canvas id="chart" aria-label="Sensor Value versus Cycle" role="img"></canvas></div>
+      </section>
+      <section class="panel"><h2>Data quality</h2><dl id="stats" class="stats"></dl></section>
+      <section class="panel"><h2>Source provenance</h2><dl id="provenance" class="metadata"></dl>
+        <details id="records"><summary>Source records</summary><div class="table-scroll"><table>
+          <thead><tr><th>Cycle</th><th>Sensor value</th><th>Record index</th><th>Physical line</th><th>Column</th></tr></thead>
+          <tbody id="rows"></tbody>
+        </table></div></details>
+      </section>
+    </div>
+  </main>
+</body>
+</html>
