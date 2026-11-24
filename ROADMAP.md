@@ -4,18 +4,18 @@
 
 ## M0 — AI COMPANY GOVERNANCE
 
-- **Status** — `IN_PROGRESS`，執行及驗收狀態以 [WORK_ITEM.md](WORK_ITEM.md) 為準。
+- **Status** — `PASS`。STUDENT-MAIN Brain 已完成 `WO-M0-001` 的遠端驗收，詳見 [WORK_ITEM.md](WORK_ITEM.md#wo-m0-001)。
 - **Goal** — 建立 AI 團隊治理、權責邊界及 GitHub 流程。
 - **Input** — STUDENT 核准的 `WO-M0-001`、已確認的專案根目錄與學生 GitHub 帳號。
 - **Deliverables** — `AGENTS.md`、`ROADMAP.md`、`WORK_ITEM.md`、`DECISIONS.md` 與 GitHub 公開儲存庫 `ntust-nasa-ai-lab` 的 `main` 正式版本。
 - **Responsible Brain** — STUDENT-MAIN Brain。
 - **Acceptance Criteria** — Brain 從 GitHub `main` 實際讀取四份完整文件，核對遠端 SHA 與 Worker 回傳的本機 SHA，驗證儲存庫為 `PUBLIC`，檢查提交範圍及 Evidence，並記錄獨立驗收結果。
 - **STOP_IF** — 無法確認根目錄、認證、擁有者或遠端歷史，發現機密或超範圍變更，或無法安全完成 Commit、Push 與遠端驗證。Worker 完成遠端檢查後停止並回報。
-- **Next Role** — STUDENT-MAIN Brain 先獨立驗收。取得 STUDENT 階段轉換核准後，由 MAIN Brain 向 RESEARCH Brain 交付 M1。
+- **Next Role** — STUDENT-MAIN Brain 驗收 `WO-M0-002` 後，依學生授權向 RESEARCH Brain 交付 M1。
 
 ## M1 — FIRST VERIFIED DATASET RETURN
 
-- **Status** — `NOT_STARTED`。
+- **Status** — `AUTHORIZED_NOT_STARTED`。STUDENT 已授權 `M1_DATASET_PROFILE_6CSV_V1`，RESEARCH Own Worker 尚未開始執行。
 - **Goal** — 由 RESEARCH Brain 協調自己的 Worker，對六筆合成 CSV 資料建立可驗證的 Dataset Profile。
 - **Input** — 已知檔名 `synthetic_sensor.csv`、經授權的資料位置與六筆資料的來源或辨識方式。六筆的分布須依盤點證據判定，禁止假定有六個既存獨立檔案。
 - **Deliverables** — Dataset Profile、資料盤點、可重現的處理方式與實際執行證據。
