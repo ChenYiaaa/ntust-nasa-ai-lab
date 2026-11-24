@@ -48,24 +48,34 @@
 - **Responsible Brain** — RESEARCH Brain。
 - **Acceptance Criteria** — 可依 Engine Unit、Cycle 與 Sensor 找到對應讀值。以本地資料抽樣比對讀值、欄位映射及資料分組，並記錄來源與驗證方式。
 - **STOP_IF** — 檔案或資料規格無法確認、索引或讀值與來源不一致，或作業涉及未授權的資料修改或發布。
-- **Next Role** — 等待 STUDENT-MAIN Brain 完成 `WO-M2-001` 遠端驗收，再由 STUDENT 決定是否授權 M3。
+- **Next Role** — STUDENT-MAIN Brain 已對 `WO-M2-001` 核發 `PASS`，受驗 Commit 為 `9af6e6b6c98c349d1f211bfb08c28664a9aa2320`。STUDENT 已授權 M3，Web Own Worker 的派工依 M3 解除條件辦理。
 
 ## M3 — HEALTH ANALYSIS WEBSITE MVP
 
-- **Status** — `NOT_STARTED`。
-- **OWNER_APPROVAL** — `NOT_GRANTED`。
-- **DISPATCH** — `NOT_AUTHORIZED`。
+- **MILESTONE** — `M3_HEALTH_ANALYSIS_WEBSITE_MVP`。
+- **Status** — `AUTHORIZED_NOT_STARTED`。
+- **OWNER_APPROVAL** — `GRANTED`。
+- **MAIN_BRAIN_AUTHORIZATION** — `GRANTED`。
+- **BRAIN_TO_BRAIN_WORK_ORDER** — `M3_FD001_HEALTH_WEBSITE_MVP_V1`。
+- **BRAIN_TO_BRAIN_STATUS** — `COMMAND_DISPATCHED`。
+- **ASSIGNED_BRAIN** — STUDENT-WEB Brain。
+- **WEB_WORKER_STATUS** — `NOT_DISPATCHED`。
+- **WEB_WORKER_RELEASE** — `PENDING_MAIN_ACCEPTANCE_OF_WO-M3-001`。
 - **Goal** — 建立網站，讓使用者選擇 Engine Unit、Cycle 與 Sensor，查看真實感測器趨勢及資料來源。
 - **Input** — M2 已驗收的 FD001 介面、欄位索引、資料來源紀錄及授權的網站工作範圍。
 - **Deliverables** — 可啟動的網站 MVP、選取介面、感測器趨勢、來源呈現與操作驗證證據。
-- **Responsible Brain** — STUDENT-MAIN Brain。
-- **Acceptance Criteria** — 使用者可完成三項選取，趨勢、範圍與來源隨選取更新。抽樣結果可與 FD001 原始讀值核對，空結果與無效選取會提供明確回饋。
-- **STOP_IF** — M2 未驗收、真實資料無法查詢、選取結果與來源不一致，或須傳輸未授權資料。
+- **Responsible Brain** — STUDENT-WEB Brain 負責執行與初驗，STUDENT-MAIN Brain 負責最終驗收。
+- **Acceptance Criteria** — 使用者可完成三項選取，網站從真實 API 取得趨勢與來源，並處理空結果與無效選取。唯讀 API 須使用學生工作區的已驗證 FD001，嚴格遵守 Data Contract `1.0.0`，定義成功及錯誤回應與 JSON `null` 語意，並保留來源追溯資訊。以實際 FD001 原始列逐筆核對 API，指定 History 查詢須核對 20 筆。Train 與 Test 須正確區分，公開交付範圍排除完整原始 TXT。
+- **STOP_IF** — `WO-M3-001` 尚未獲 MAIN Brain 驗收、FD001 資料無法查詢、選取結果與來源不一致，或須傳輸未授權資料。
+- **AMENDMENT_ID** — `M3_FD001_READONLY_API_REQUIREMENTS_V1`。
+- **REQUIRED_ENDPOINTS** — `GET /api/health`、`GET /api/catalog`、`GET /api/units`、`GET /api/history`。
+- **MANDATORY_TEST_QUERY** — `/api/history?split=train&unit=1&sensor=7&start=1&end=20`。
 - **Next Role** — STUDENT-MAIN Brain 驗收並取得 STUDENT 核准後，派發 M4。
 
 ## M4 — EVIDENCE PROMPT GENERATION
 
 - **Status** — `NOT_STARTED`。
+- **AUTHORIZATION** — `NOT_AUTHORIZED`。
 - **Goal** — 根據網站選取條件與真實資料產生可複製、可追溯的 Evidence Prompt。
 - **Input** — M3 已驗收的選取與查詢介面、M2 的來源資訊及授權的 Prompt 格式。
 - **Deliverables** — Evidence Prompt 產生與複製功能、輸出範例及原始資料比對證據。
@@ -77,6 +87,7 @@
 ## M5 — END-TO-END VALIDATION AND DELIVERY
 
 - **Status** — `NOT_STARTED`。
+- **AUTHORIZATION** — `NOT_AUTHORIZED`。
 - **Goal** — 完成網站、資料、Evidence Prompt、GitHub 與啟動流程的整體驗收。
 - **Input** — M0 至 M4 的驗收紀錄、GitHub `main`、授權的本地資料及執行環境。
 - **Deliverables** — 啟動與驗證說明、端到端驗收紀錄、可追溯的 GitHub 交付版本及已知問題紀錄。

@@ -109,12 +109,60 @@ STUDENT-MAIN Brain 正式驗收 `WO-M0-001` 為 `PASS`。`WO-M0-002` 依 MAIN Br
 
 ### M3_RELEASE_CONDITION
 
-M3 狀態為 `NOT_STARTED`，學生授權為 `NOT_GRANTED`，派工為 `NOT_AUTHORIZED`。開始 M3 前須依序完成下列事項。
+STUDENT-MAIN Brain 已對 `WO-M2-001` 核發 `PASS`，受驗 Commit 為 `9af6e6b6c98c349d1f211bfb08c28664a9aa2320`。STUDENT 已正式授權 M3，MAIN Brain 已派工給 STUDENT-WEB Brain。Web Own Worker 的派工解除條件見下方 M3 工作單。
 
-1. MAIN Brain 驗收 `WO-M2-001` 為 `PASS`。
-2. 核對 GitHub `main` 最新治理文件。
-3. STUDENT 正式授權 M3。
-4. MAIN Brain 正式指派 Web Brain。
+## M3_FD001_HEALTH_WEBSITE_MVP_V1
+
+| 欄位 | 值 |
+| --- | --- |
+| WORK_ITEM_ID | `M3_FD001_HEALTH_WEBSITE_MVP_V1` |
+| TYPE | `BOUNDED_BRAIN_TO_BRAIN_WORK_ORDER` |
+| FROM | STUDENT-MAIN Brain |
+| TO | STUDENT-WEB Brain |
+| OWNER_APPROVAL | `GRANTED` |
+| STATUS | `COMMAND_DISPATCHED_TO_WEB_BRAIN` |
+| WEB_OWN_WORKER | `NOT_DISPATCHED` |
+| WEB_WORKER_RELEASE | `PENDING_MAIN_ACCEPTANCE_OF_WO-M3-001` |
+| ACCEPTANCE_OWNER | STUDENT-MAIN Brain |
+
+### M3_FD001_READONLY_API_REQUIREMENTS_V1
+
+- **OBJECTIVE** — 建立本地 FD001 唯讀 API 與網站 MVP。
+- **INPUT** — 已驗收的 `M2_FD001_DATA_CONTRACT_V1`、Data Contract Schema `1.0.0`，以及學生工作區的三份已驗證 FD001 TXT。
+- **EXPECTED_OUTPUT** — FD001 唯讀 API、成功與錯誤回應 Schema、JSON `null` 處理規則、來源追溯資訊、原始列與 API 的核對證據、M3 前端 MVP、感測器趨勢圖、Browser UAT、可重現的啟動說明，以及 GitHub 交付證據。
+- **REQUIRED_ENDPOINTS** — `GET /api/health`、`GET /api/catalog`、`GET /api/units`、`GET /api/history`。
+- **MANDATORY_TEST_QUERY** — `/api/history?split=train&unit=1&sensor=7&start=1&end=20`。
+- **AUTHORIZED_SCOPE** — M3 網站、唯讀 API、測試、必要設定及操作說明。Web Brain 在自己的 Worker 工作單界定可寫目錄及檔案。既有 Research 產物、M2 Data Contract 與原始 TXT 均為唯讀。
+- **RETURN_TO** — STUDENT-MAIN Brain。
+
+#### ACCEPTANCE
+
+STUDENT-WEB Brain 先驗收 Web Own Worker 成果，STUDENT-MAIN Brain 負責 M3 最終驗收。
+
+1. API 讀取學生工作區的實際 FD001，來源 SHA-256 與 M2 契約一致。
+2. 指定 History 查詢回傳 20 筆。逐筆核對 Sensor 7 的 API 值、Cycle 與原始實體行定位。
+3. 來源追溯資訊完整，成功及錯誤回應 Schema 與 JSON `null` 語意遵循 Data Contract `1.0.0`。
+4. Train 與 Test 均可獨立查詢，結果屬於指定分割。
+5. 網站使用真實 API 繪圖，Browser UAT 通過，並提供可重現的啟動說明。
+6. GitHub 提交範圍符合授權，公開交付範圍排除完整原始 TXT。
+
+#### STOP_IF
+
+- MAIN Brain 尚未對 `WO-M3-001` 核發 `PASS`，或無法確認最新治理文件。
+- FD001 來源或 SHA-256 與 M2 Data Contract 不一致，或 API 回應與原始資料不符。
+- 必須修改未授權檔案或 M2 Data Contract，或必須公開原始 TXT。
+- GitHub Commit 或 Push 失敗。
+- M4 或 M5 工作被提前觸發。兩階段均為 `NOT_AUTHORIZED`。
+
+#### WEB_WORKER_RELEASE
+
+STUDENT 已正式授權 M3。Web Own Worker 目前為 `NOT_DISPATCHED`。派工須依序完成以下步驟。
+
+1. 將 `WO-M3-001` 的治理變更提交至 GitHub `main`。
+2. STUDENT-MAIN Brain 從遠端獨立驗收 `WO-M3-001` 並核發 `PASS`。
+3. STUDENT-WEB Brain 重新核對 GitHub 最新治理文件。
+4. STUDENT-WEB Brain 確認其他治理阻塞均已解除。
+5. STUDENT-WEB Brain 正式派遣自己的 Web Own Worker。
 
 ## 後續工作單必填欄位
 
