@@ -1,0 +1,473 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "FD001 successful GET response",
+  "oneOf": [
+    {
+      "$ref": "#/$defs/health"
+    },
+    {
+      "$ref": "#/$defs/catalog"
+    },
+    {
+      "$ref": "#/$defs/units"
+    },
+    {
+      "$ref": "#/$defs/history"
+    }
+  ],
+  "$defs": {
+    "source": {
+      "type": "object",
+      "properties": {
+        "source_filename": {
+          "enum": [
+            "train_FD001.txt",
+            "test_FD001.txt",
+            "RUL_FD001.txt"
+          ]
+        },
+        "source_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      },
+      "required": [
+        "source_filename",
+        "source_sha256"
+      ],
+      "additionalProperties": false
+    },
+    "sensor": {
+      "type": "object",
+      "properties": {
+        "sensor_id": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 21
+        },
+        "column_name": {
+          "type": "string",
+          "pattern": "^sensor_[1-9][0-9]?$"
+        },
+        "column_position": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "dtype": {
+          "const": "number"
+        },
+        "semantic_role": {
+          "const": "sensor"
+        },
+        "unit_of_measure_if_known": {
+          "const": "UNKNOWN"
+        },
+        "nullable": {
+          "const": false
+        },
+        "source_field": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "required": [
+        "sensor_id",
+        "column_name",
+        "column_position",
+        "dtype",
+        "semantic_role",
+        "unit_of_measure_if_known",
+        "nullable",
+        "source_field"
+      ],
+      "additionalProperties": false
+    },
+    "point": {
+      "type": "object",
+      "properties": {
+        "cycle": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "value": {
+          "type": "number"
+        },
+        "source_record_index": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "source_physical_line": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "column_position": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "required": [
+        "cycle",
+        "value",
+        "source_record_index",
+        "source_physical_line",
+        "column_position"
+      ],
+      "additionalProperties": false
+    },
+    "health": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "const": "ok"
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "dataset_id": {
+              "const": "FD001"
+            },
+            "service": {
+              "const": "ready"
+            }
+          },
+          "required": [
+            "dataset_id",
+            "service"
+          ],
+          "additionalProperties": false
+        },
+        "provenance": {
+          "type": "object",
+          "properties": {
+            "contract_version": {
+              "const": "1.0.0"
+            },
+            "verification_status": {
+              "const": "VERIFIED_LOCAL_SOURCE"
+            },
+            "sources": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/source"
+              },
+              "minItems": 3,
+              "maxItems": 3,
+              "uniqueItems": true
+            }
+          },
+          "required": [
+            "contract_version",
+            "verification_status",
+            "sources"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "status",
+        "data",
+        "provenance"
+      ],
+      "additionalProperties": false
+    },
+    "catalog": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "const": "ok"
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "dataset_id": {
+              "const": "FD001"
+            },
+            "splits": {
+              "const": [
+                "train",
+                "test"
+              ]
+            },
+            "sensors": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/sensor"
+              },
+              "minItems": 21,
+              "maxItems": 21
+            }
+          },
+          "required": [
+            "dataset_id",
+            "splits",
+            "sensors"
+          ],
+          "additionalProperties": false
+        },
+        "provenance": {
+          "type": "object",
+          "properties": {
+            "contract_version": {
+              "const": "1.0.0"
+            },
+            "verification_status": {
+              "const": "VERIFIED_LOCAL_SOURCE"
+            },
+            "sources": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/source"
+              },
+              "minItems": 3,
+              "maxItems": 3,
+              "uniqueItems": true
+            },
+            "metadata_source": {
+              "const": "fd001_column_schema.json"
+            }
+          },
+          "required": [
+            "contract_version",
+            "verification_status",
+            "sources",
+            "metadata_source"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "status",
+        "data",
+        "provenance"
+      ],
+      "additionalProperties": false
+    },
+    "units": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "const": "ok"
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "dataset_id": {
+              "const": "FD001"
+            },
+            "split": {
+              "enum": [
+                "train",
+                "test"
+              ]
+            },
+            "unit_ids": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "minItems": 1,
+              "uniqueItems": true
+            }
+          },
+          "required": [
+            "dataset_id",
+            "split",
+            "unit_ids"
+          ],
+          "additionalProperties": false
+        },
+        "provenance": {
+          "type": "object",
+          "properties": {
+            "contract_version": {
+              "const": "1.0.0"
+            },
+            "verification_status": {
+              "const": "VERIFIED_LOCAL_SOURCE"
+            },
+            "sources": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/source"
+              },
+              "minItems": 1,
+              "maxItems": 1,
+              "uniqueItems": true
+            },
+            "split": {
+              "enum": [
+                "train",
+                "test"
+              ]
+            },
+            "column_name": {
+              "const": "unit_id"
+            },
+            "column_position": {
+              "const": 1
+            }
+          },
+          "required": [
+            "contract_version",
+            "verification_status",
+            "sources",
+            "split",
+            "column_name",
+            "column_position"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "status",
+        "data",
+        "provenance"
+      ],
+      "additionalProperties": false
+    },
+    "history": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "const": "ok"
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "dataset_id": {
+              "const": "FD001"
+            },
+            "split": {
+              "enum": [
+                "train",
+                "test"
+              ]
+            },
+            "unit_id": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "sensor_id": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 21
+            },
+            "cycle_start": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "cycle_end": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "observation_count": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "points": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/point"
+              },
+              "minItems": 1
+            }
+          },
+          "required": [
+            "dataset_id",
+            "split",
+            "unit_id",
+            "sensor_id",
+            "cycle_start",
+            "cycle_end",
+            "observation_count",
+            "points"
+          ],
+          "additionalProperties": false
+        },
+        "provenance": {
+          "type": "object",
+          "properties": {
+            "contract_version": {
+              "const": "1.0.0"
+            },
+            "verification_status": {
+              "const": "VERIFIED_LOCAL_SOURCE"
+            },
+            "sources": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/source"
+              },
+              "minItems": 1,
+              "maxItems": 1,
+              "uniqueItems": true
+            },
+            "split": {
+              "enum": [
+                "train",
+                "test"
+              ]
+            },
+            "unit_id": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "sensor_id": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 21
+            },
+            "cycle_start": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "cycle_end": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "column_name": {
+              "type": "string",
+              "pattern": "^sensor_[1-9][0-9]?$"
+            },
+            "column_position": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "index_base": {
+              "const": 1
+            },
+            "source_row_reference": {
+              "const": "/data/points"
+            },
+            "calculation_method": {
+              "const": "Direct source lookup"
+            }
+          },
+          "required": [
+            "contract_version",
+            "verification_status",
+            "sources",
+            "split",
+            "unit_id",
+            "sensor_id",
+            "cycle_start",
+            "cycle_end",
+            "column_name",
+            "column_position",
+            "index_base",
+            "source_row_reference",
+            "calculation_method"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "status",
+        "data",
+        "provenance"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

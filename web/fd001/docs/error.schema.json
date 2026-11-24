@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "FD001 API error",
+  "type": "object",
+  "properties": {
+    "status": {
+      "const": "error"
+    },
+    "error": {
+      "type": "object",
+      "properties": {
+        "error_code": {
+          "enum": [
+            "INVALID_SPLIT",
+            "UNKNOWN_UNIT",
+            "UNKNOWN_SENSOR",
+            "CYCLE_OUT_OF_RANGE",
+            "SOURCE_NOT_VERIFIED",
+            "RUL_MAPPING_INVALID",
+            "INVALID_PARAMETER",
+            "NON_FINITE_RESULT",
+            "HTTP_ERROR"
+          ]
+        },
+        "message": {
+          "type": "string",
+          "minLength": 1
+        },
+        "input_context": {
+          "type": "object"
+        },
+        "recoverability": {
+          "enum": [
+            "CORRECT_INPUT",
+            "RESTORE_AUTHORIZED_SOURCE",
+            "REVALIDATE_SOURCE_AND_MAPPING",
+            "REVALIDATE_RESULT",
+            "CHECK_REQUEST"
+          ]
+        }
+      },
+      "required": [
+        "error_code",
+        "message",
+        "input_context",
+        "recoverability"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "status",
+    "error"
+  ],
+  "additionalProperties": false
+}
