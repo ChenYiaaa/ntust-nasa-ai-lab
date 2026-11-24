@@ -1,0 +1,326 @@
+{
+  "train": [
+    {
+      "position": 1,
+      "name": "unit_id",
+      "logical_dtype": "integer",
+      "numeric_parser_dtype": "float64"
+    },
+    {
+      "position": 2,
+      "name": "cycle",
+      "logical_dtype": "integer",
+      "numeric_parser_dtype": "float64"
+    },
+    {
+      "position": 3,
+      "name": "setting_1",
+      "logical_dtype": "real",
+      "numeric_parser_dtype": "float64"
+    },
+    {
+      "position": 4,
+      "name": "setting_2",
+      "logical_dtype": "real",
+      "numeric_parser_dtype": "float64"
+    },
+    {
+      "position": 5,
+      "name": "setting_3",
+      "logical_dtype": "real",
+      "numeric_parser_dtype": "float64"
+    },
+    {
+      "position": 6,
+      "name": "sensor_1",
+      "logical_dtype": "real",
+      "numeric_parser_dtype": "float64"
+    },
+    {
+      "position": 7,
+      "name": "sensor_2",
+      "logical_dtype": "real",
+      "numeric_parser_dtype": "float64"
+    },
+    {
+      "position": 8,
+      "name": "sensor_3",
+      "logical_dtype": "real",
+      "numeric_parser_dtype": "float64"
+    },
+    {
+      "position": 9,
+      "name": "sensor_4",
+      "logical_dtype": "real",
+      "numeric_parser_dtype": "float64"
+    },
+    {
+      "position": 10,
+      "name": "sensor_5",
+      "logical_dtype": "real",
+      "numeric_parser_dtype": "float64"
+    },
+    {
+      "position": 11,
+      "name": "sensor_6",
+      "logical_dtype": "real",
+      "numeric_parser_dtype": "float64"
+    },
+    {
+      "position": 12,
+      "name": "sensor_7",
+      "logical_dtype": "real",
+      "numeric_parser_dtype": "float64"
+    },
+    {
+      "position": 13,
+      "name": "sensor_8",
+      "logical_dtype": "real",
+      "numeric_parser_dtype": "float64"
+    },
+    {
+      "position": 14,
+      "name": "sensor_9",
+      "logical_dtype": "real",
+      "numeric_parser_dtype": "float64"
+    },
+    {
+      "position": 15,
+      "name": "sensor_10",
+      "logical_dtype": "real",
+      "numeric_parser_dtype": "float64"
+    },
+    {
+      "position": 16,
+      "name": "sensor_11",
+      "logical_dtype": "real",
+      "numeric_parser_dtype": "float64"
+    },
+    {
+      "position": 17,
+      "name": "sensor_12",
+      "logical_dtype": "real",
+      "numeric_parser_dtype": "float64"
+    },
+    {
+      "position": 18,
+      "name": "sensor_13",
+      "logical_dtype": "real",
+      "numeric_parser_dtype": "float64"
+    },
+    {
+      "position": 19,
+      "name": "sensor_14",
+      "logical_dtype": "real",
+      "numeric_parser_dtype": "float64"
+    },
+    {
+      "position": 20,
+      "name": "sensor_15",
+      "logical_dtype": "real",
+      "numeric_parser_dtype": "float64"
+    },
+    {
+      "position": 21,
+      "name": "sensor_16",
+      "logical_dtype": "real",
+      "numeric_parser_dtype": "float64"
+    },
+    {
+      "position": 22,
+      "name": "sensor_17",
+      "logical_dtype": "real",
+      "numeric_parser_dtype": "float64"
+    },
+    {
+      "position": 23,
+      "name": "sensor_18",
+      "logical_dtype": "real",
+      "numeric_parser_dtype": "float64"
+    },
+    {
+      "position": 24,
+      "name": "sensor_19",
+      "logical_dtype": "real",
+      "numeric_parser_dtype": "float64"
+    },
+    {
+      "position": 25,
+      "name": "sensor_20",
+      "logical_dtype": "real",
+      "numeric_parser_dtype": "float64"
+    },
+    {
+      "position": 26,
+      "name": "sensor_21",
+      "logical_dtype": "real",
+      "numeric_parser_dtype": "float64"
+    }
+  ],
+  "test": [
+    {
+      "position": 1,
+      "name": "unit_id",
+      "logical_dtype": "integer",
+      "numeric_parser_dtype": "float64"
+    },
+    {
+      "position": 2,
+      "name": "cycle",
+      "logical_dtype": "integer",
+      "numeric_parser_dtype": "float64"
+    },
+    {
+      "position": 3,
+      "name": "setting_1",
+      "logical_dtype": "real",
+      "numeric_parser_dtype": "float64"
+    },
+    {
+      "position": 4,
+      "name": "setting_2",
+      "logical_dtype": "real",
+      "numeric_parser_dtype": "float64"
+    },
+    {
+      "position": 5,
+      "name": "setting_3",
+      "logical_dtype": "real",
+      "numeric_parser_dtype": "float64"
+    },
+    {
+      "position": 6,
+      "name": "sensor_1",
+      "logical_dtype": "real",
+      "numeric_parser_dtype": "float64"
+    },
+    {
+      "position": 7,
+      "name": "sensor_2",
+      "logical_dtype": "real",
+      "numeric_parser_dtype": "float64"
+    },
+    {
+      "position": 8,
+      "name": "sensor_3",
+      "logical_dtype": "real",
+      "numeric_parser_dtype": "float64"
+    },
+    {
+      "position": 9,
+      "name": "sensor_4",
+      "logical_dtype": "real",
+      "numeric_parser_dtype": "float64"
+    },
+    {
+      "position": 10,
+      "name": "sensor_5",
+      "logical_dtype": "real",
+      "numeric_parser_dtype": "float64"
+    },
+    {
+      "position": 11,
+      "name": "sensor_6",
+      "logical_dtype": "real",
+      "numeric_parser_dtype": "float64"
+    },
+    {
+      "position": 12,
+      "name": "sensor_7",
+      "logical_dtype": "real",
+      "numeric_parser_dtype": "float64"
+    },
+    {
+      "position": 13,
+      "name": "sensor_8",
+      "logical_dtype": "real",
+      "numeric_parser_dtype": "float64"
+    },
+    {
+      "position": 14,
+      "name": "sensor_9",
+      "logical_dtype": "real",
+      "numeric_parser_dtype": "float64"
+    },
+    {
+      "position": 15,
+      "name": "sensor_10",
+      "logical_dtype": "real",
+      "numeric_parser_dtype": "float64"
+    },
+    {
+      "position": 16,
+      "name": "sensor_11",
+      "logical_dtype": "real",
+      "numeric_parser_dtype": "float64"
+    },
+    {
+      "position": 17,
+      "name": "sensor_12",
+      "logical_dtype": "real",
+      "numeric_parser_dtype": "float64"
+    },
+    {
+      "position": 18,
+      "name": "sensor_13",
+      "logical_dtype": "real",
+      "numeric_parser_dtype": "float64"
+    },
+    {
+      "position": 19,
+      "name": "sensor_14",
+      "logical_dtype": "real",
+      "numeric_parser_dtype": "float64"
+    },
+    {
+      "position": 20,
+      "name": "sensor_15",
+      "logical_dtype": "real",
+      "numeric_parser_dtype": "float64"
+    },
+    {
+      "position": 21,
+      "name": "sensor_16",
+      "logical_dtype": "real",
+      "numeric_parser_dtype": "float64"
+    },
+    {
+      "position": 22,
+      "name": "sensor_17",
+      "logical_dtype": "real",
+      "numeric_parser_dtype": "float64"
+    },
+    {
+      "position": 23,
+      "name": "sensor_18",
+      "logical_dtype": "real",
+      "numeric_parser_dtype": "float64"
+    },
+    {
+      "position": 24,
+      "name": "sensor_19",
+      "logical_dtype": "real",
+      "numeric_parser_dtype": "float64"
+    },
+    {
+      "position": 25,
+      "name": "sensor_20",
+      "logical_dtype": "real",
+      "numeric_parser_dtype": "float64"
+    },
+    {
+      "position": 26,
+      "name": "sensor_21",
+      "logical_dtype": "real",
+      "numeric_parser_dtype": "float64"
+    }
+  ],
+  "rul": [
+    {
+      "position": 1,
+      "name": "final_RUL",
+      "logical_dtype": "integer",
+      "numeric_parser_dtype": "float64"
+    }
+  ]
+}

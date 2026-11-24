@@ -1,0 +1,476 @@
+[
+  {
+    "name": "train pinned local SHA256",
+    "expected": "963b5e22825b34d8b21c69e1aeb4af3e647050eb672ee8834ba4b5d91d2de0f8",
+    "actual": "963b5e22825b34d8b21c69e1aeb4af3e647050eb672ee8834ba4b5d91d2de0f8",
+    "status": "PASS",
+    "original_error": null
+  },
+  {
+    "name": "train observed widths",
+    "expected": [
+      26
+    ],
+    "actual": [
+      26
+    ],
+    "status": "PASS",
+    "original_error": null
+  },
+  {
+    "name": "train independent shape",
+    "expected": [
+      20631,
+      26
+    ],
+    "actual": [
+      20631,
+      26
+    ],
+    "status": "PASS",
+    "original_error": null
+  },
+  {
+    "name": "train physical lines",
+    "expected": 20631,
+    "actual": 20631,
+    "status": "PASS",
+    "original_error": null
+  },
+  {
+    "name": "train independent nonfinite count",
+    "expected": 0,
+    "actual": 0,
+    "status": "PASS",
+    "original_error": null
+  },
+  {
+    "name": "train invalid or nonfinite entries",
+    "expected": 0,
+    "actual": 0,
+    "status": "PASS",
+    "original_error": null
+  },
+  {
+    "name": "train empty/missing fields or NaN",
+    "expected": 0,
+    "actual": 0,
+    "status": "PASS",
+    "original_error": null
+  },
+  {
+    "name": "train all parsed values agree",
+    "expected": true,
+    "actual": true,
+    "status": "PASS",
+    "original_error": null
+  },
+  {
+    "name": "train unit_id noninteger values",
+    "expected": 0,
+    "actual": 0,
+    "status": "PASS",
+    "original_error": null
+  },
+  {
+    "name": "train cycle noninteger values",
+    "expected": 0,
+    "actual": 0,
+    "status": "PASS",
+    "original_error": null
+  },
+  {
+    "name": "train duplicate-record counts",
+    "expected": 0,
+    "actual": 0,
+    "status": "PASS",
+    "original_error": null
+  },
+  {
+    "name": "train ordered cycle keys",
+    "expected": true,
+    "actual": true,
+    "status": "PASS",
+    "original_error": null
+  },
+  {
+    "name": "train duplicate keys",
+    "expected": 0,
+    "actual": 0,
+    "status": "PASS",
+    "original_error": null
+  },
+  {
+    "name": "train independent IDs",
+    "expected": {
+      "result": "matched locally",
+      "item_count": 100
+    },
+    "actual": {
+      "result": "matched locally",
+      "item_count": 100
+    },
+    "status": "PASS",
+    "original_error": null
+  },
+  {
+    "name": "train contiguous cycles starting at one in source order",
+    "expected": true,
+    "actual": true,
+    "status": "PASS",
+    "original_error": null
+  },
+  {
+    "name": "train raw locator sample 1",
+    "expected": true,
+    "actual": true,
+    "status": "PASS",
+    "original_error": null
+  },
+  {
+    "name": "train raw locator sample 2",
+    "expected": true,
+    "actual": true,
+    "status": "PASS",
+    "original_error": null
+  },
+  {
+    "name": "train raw locator sample 3",
+    "expected": true,
+    "actual": true,
+    "status": "PASS",
+    "original_error": null
+  },
+  {
+    "name": "train SHA256 after analysis",
+    "expected": "963b5e22825b34d8b21c69e1aeb4af3e647050eb672ee8834ba4b5d91d2de0f8",
+    "actual": "963b5e22825b34d8b21c69e1aeb4af3e647050eb672ee8834ba4b5d91d2de0f8",
+    "status": "PASS",
+    "original_error": null
+  },
+  {
+    "name": "test pinned local SHA256",
+    "expected": "3cda7109ce17bafb5443f2ac926cfcf88154b941b8c4cf95eb55d1ddd6f52851",
+    "actual": "3cda7109ce17bafb5443f2ac926cfcf88154b941b8c4cf95eb55d1ddd6f52851",
+    "status": "PASS",
+    "original_error": null
+  },
+  {
+    "name": "test observed widths",
+    "expected": [
+      26
+    ],
+    "actual": [
+      26
+    ],
+    "status": "PASS",
+    "original_error": null
+  },
+  {
+    "name": "test independent shape",
+    "expected": [
+      13096,
+      26
+    ],
+    "actual": [
+      13096,
+      26
+    ],
+    "status": "PASS",
+    "original_error": null
+  },
+  {
+    "name": "test physical lines",
+    "expected": 13096,
+    "actual": 13096,
+    "status": "PASS",
+    "original_error": null
+  },
+  {
+    "name": "test independent nonfinite count",
+    "expected": 0,
+    "actual": 0,
+    "status": "PASS",
+    "original_error": null
+  },
+  {
+    "name": "test invalid or nonfinite entries",
+    "expected": 0,
+    "actual": 0,
+    "status": "PASS",
+    "original_error": null
+  },
+  {
+    "name": "test empty/missing fields or NaN",
+    "expected": 0,
+    "actual": 0,
+    "status": "PASS",
+    "original_error": null
+  },
+  {
+    "name": "test all parsed values agree",
+    "expected": true,
+    "actual": true,
+    "status": "PASS",
+    "original_error": null
+  },
+  {
+    "name": "test unit_id noninteger values",
+    "expected": 0,
+    "actual": 0,
+    "status": "PASS",
+    "original_error": null
+  },
+  {
+    "name": "test cycle noninteger values",
+    "expected": 0,
+    "actual": 0,
+    "status": "PASS",
+    "original_error": null
+  },
+  {
+    "name": "test duplicate-record counts",
+    "expected": 0,
+    "actual": 0,
+    "status": "PASS",
+    "original_error": null
+  },
+  {
+    "name": "test ordered cycle keys",
+    "expected": true,
+    "actual": true,
+    "status": "PASS",
+    "original_error": null
+  },
+  {
+    "name": "test duplicate keys",
+    "expected": 0,
+    "actual": 0,
+    "status": "PASS",
+    "original_error": null
+  },
+  {
+    "name": "test independent IDs",
+    "expected": {
+      "result": "matched locally",
+      "item_count": 100
+    },
+    "actual": {
+      "result": "matched locally",
+      "item_count": 100
+    },
+    "status": "PASS",
+    "original_error": null
+  },
+  {
+    "name": "test contiguous cycles starting at one in source order",
+    "expected": true,
+    "actual": true,
+    "status": "PASS",
+    "original_error": null
+  },
+  {
+    "name": "test raw locator sample 1",
+    "expected": true,
+    "actual": true,
+    "status": "PASS",
+    "original_error": null
+  },
+  {
+    "name": "test raw locator sample 2",
+    "expected": true,
+    "actual": true,
+    "status": "PASS",
+    "original_error": null
+  },
+  {
+    "name": "test raw locator sample 3",
+    "expected": true,
+    "actual": true,
+    "status": "PASS",
+    "original_error": null
+  },
+  {
+    "name": "test SHA256 after analysis",
+    "expected": "3cda7109ce17bafb5443f2ac926cfcf88154b941b8c4cf95eb55d1ddd6f52851",
+    "actual": "3cda7109ce17bafb5443f2ac926cfcf88154b941b8c4cf95eb55d1ddd6f52851",
+    "status": "PASS",
+    "original_error": null
+  },
+  {
+    "name": "rul pinned local SHA256",
+    "expected": "a19c8ec94931949d0485bdc35118206e9c81c4547b422efb9cf86f4ceddbceca",
+    "actual": "a19c8ec94931949d0485bdc35118206e9c81c4547b422efb9cf86f4ceddbceca",
+    "status": "PASS",
+    "original_error": null
+  },
+  {
+    "name": "rul observed widths",
+    "expected": [
+      1
+    ],
+    "actual": [
+      1
+    ],
+    "status": "PASS",
+    "original_error": null
+  },
+  {
+    "name": "rul independent shape",
+    "expected": [
+      100,
+      1
+    ],
+    "actual": [
+      100,
+      1
+    ],
+    "status": "PASS",
+    "original_error": null
+  },
+  {
+    "name": "rul physical lines",
+    "expected": 100,
+    "actual": 100,
+    "status": "PASS",
+    "original_error": null
+  },
+  {
+    "name": "rul independent nonfinite count",
+    "expected": 0,
+    "actual": 0,
+    "status": "PASS",
+    "original_error": null
+  },
+  {
+    "name": "rul invalid or nonfinite entries",
+    "expected": 0,
+    "actual": 0,
+    "status": "PASS",
+    "original_error": null
+  },
+  {
+    "name": "rul empty/missing fields or NaN",
+    "expected": 0,
+    "actual": 0,
+    "status": "PASS",
+    "original_error": null
+  },
+  {
+    "name": "rul all parsed values agree",
+    "expected": true,
+    "actual": true,
+    "status": "PASS",
+    "original_error": null
+  },
+  {
+    "name": "rul final_RUL noninteger values",
+    "expected": 0,
+    "actual": 0,
+    "status": "PASS",
+    "original_error": null
+  },
+  {
+    "name": "rul duplicate-record counts",
+    "expected": 29,
+    "actual": 29,
+    "status": "PASS",
+    "original_error": null
+  },
+  {
+    "name": "RUL negative values",
+    "expected": 0,
+    "actual": 0,
+    "status": "PASS",
+    "original_error": null
+  },
+  {
+    "name": "rul raw locator sample 1",
+    "expected": true,
+    "actual": true,
+    "status": "PASS",
+    "original_error": null
+  },
+  {
+    "name": "rul raw locator sample 2",
+    "expected": true,
+    "actual": true,
+    "status": "PASS",
+    "original_error": null
+  },
+  {
+    "name": "rul raw locator sample 3",
+    "expected": true,
+    "actual": true,
+    "status": "PASS",
+    "original_error": null
+  },
+  {
+    "name": "rul SHA256 after analysis",
+    "expected": "a19c8ec94931949d0485bdc35118206e9c81c4547b422efb9cf86f4ceddbceca",
+    "actual": "a19c8ec94931949d0485bdc35118206e9c81c4547b422efb9cf86f4ceddbceca",
+    "status": "PASS",
+    "original_error": null
+  },
+  {
+    "name": "train/test schema",
+    "expected": {
+      "result": "matched locally",
+      "item_count": 26
+    },
+    "actual": {
+      "result": "matched locally",
+      "item_count": 26
+    },
+    "status": "PASS",
+    "original_error": null
+  },
+  {
+    "name": "test ID ranks are contiguous and 1-based",
+    "expected": {
+      "result": "matched locally",
+      "item_count": 100
+    },
+    "actual": {
+      "result": "matched locally",
+      "item_count": 100
+    },
+    "status": "PASS",
+    "original_error": null
+  },
+  {
+    "name": "one RUL for each independently validated test-unit rank",
+    "expected": 100,
+    "actual": 100,
+    "status": "PASS",
+    "original_error": null
+  },
+  {
+    "name": "RUL labels traced to source by verified rank",
+    "expected": 100,
+    "actual": 100,
+    "status": "PASS",
+    "original_error": null
+  },
+  {
+    "name": "train final input stability",
+    "expected": "963b5e22825b34d8b21c69e1aeb4af3e647050eb672ee8834ba4b5d91d2de0f8",
+    "actual": "963b5e22825b34d8b21c69e1aeb4af3e647050eb672ee8834ba4b5d91d2de0f8",
+    "status": "PASS",
+    "original_error": null
+  },
+  {
+    "name": "test final input stability",
+    "expected": "3cda7109ce17bafb5443f2ac926cfcf88154b941b8c4cf95eb55d1ddd6f52851",
+    "actual": "3cda7109ce17bafb5443f2ac926cfcf88154b941b8c4cf95eb55d1ddd6f52851",
+    "status": "PASS",
+    "original_error": null
+  },
+  {
+    "name": "rul final input stability",
+    "expected": "a19c8ec94931949d0485bdc35118206e9c81c4547b422efb9cf86f4ceddbceca",
+    "actual": "a19c8ec94931949d0485bdc35118206e9c81c4547b422efb9cf86f4ceddbceca",
+    "status": "PASS",
+    "original_error": null
+  }
+]

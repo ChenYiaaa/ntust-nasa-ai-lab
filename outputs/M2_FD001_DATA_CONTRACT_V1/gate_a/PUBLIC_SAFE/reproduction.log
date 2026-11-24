@@ -1,0 +1,7 @@
+Executed the public validator with a separate ignored local output directory.
+Compared the exact nine expected JSON paths and every output byte against the original local checkpoint.
+Six top-level and three local-only JSON artifacts matched.
+All 60 check statuses were PASS.
+Historical checkpoint log recorded an initial HTTPS scan false positive (exit 1) and corrected scan (exit 0).
+The original run's banner was corrected from 10 to 9 JSON files.
+Reproduction comparison exit_code=0

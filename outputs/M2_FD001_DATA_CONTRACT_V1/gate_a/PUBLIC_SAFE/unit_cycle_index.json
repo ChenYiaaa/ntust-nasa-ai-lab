@@ -1,0 +1,36 @@
+{
+  "train": {
+    "unit_count": 100,
+    "unit_id_range": [
+      1,
+      100
+    ],
+    "observed_cycle_range": [
+      1,
+      362
+    ],
+    "last_observed_cycle_range": [
+      128,
+      362
+    ],
+    "units_with_gap": 0,
+    "duplicate_cycle_keys": 0
+  },
+  "test": {
+    "unit_count": 100,
+    "unit_id_range": [
+      1,
+      100
+    ],
+    "observed_cycle_range": [
+      1,
+      303
+    ],
+    "last_observed_cycle_range": [
+      31,
+      303
+    ],
+    "units_with_gap": 0,
+    "duplicate_cycle_keys": 0
+  }
+}

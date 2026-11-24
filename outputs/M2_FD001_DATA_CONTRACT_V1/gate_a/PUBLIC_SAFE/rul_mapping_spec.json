@@ -1,0 +1,8 @@
+{
+  "status": "VERIFIED_BY_REFERENCE_CONVENTION",
+  "unit_count": 100,
+  "basis_id": "MW_FD001_SORTED_ID",
+  "basis": "MathWorks FD001 localLoadData: RUL record i belongs to test unit at ascending unique-ID rank i.",
+  "reference": "https://it.mathworks.com/help/predmaint/ug/remaining-useful-life-estimation-using-convolutional-neural-network.html",
+  "independent_unit_key_in_rul": false
+}
