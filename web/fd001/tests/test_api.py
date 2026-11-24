@@ -112,12 +112,33 @@ class ApiTests(unittest.TestCase):
 
     def test_health(self):
         body = self.fetch("/api/health")
+        self.assertEqual(body["data"], {
+            "dataset_id": "FD001",
+            "schema_version": "1.0.0",
+            "service": "ready",
+            "source_verified": True,
+            "source_status": "VERIFIED_LOCAL_SOURCE",
+            "read_only": True,
+        })
+        self.assertIs(body["data"]["source_verified"], True)
+        self.assertIs(body["data"]["read_only"], True)
+        self.assertEqual(body["data"]["source_status"], body["provenance"]["verification_status"])
         pins = {s["source_filename"]: s["source_sha256"] for s in body["provenance"]["sources"]}
         for name in ("train_FD001.txt", "test_FD001.txt", "RUL_FD001.txt"):
             self.assertEqual(pins[name], sha256((api.SOURCE_DIR / name).read_bytes()).hexdigest())
 
     def test_catalog(self):
-        sensors = self.fetch("/api/catalog")["data"]["sensors"]
+        data = self.fetch("/api/catalog")["data"]
+        self.assertEqual(data["schema_version"], "1.0.0")
+        self.assertEqual(data["available_splits"], ["train", "test"])
+        self.assertEqual(data["source_version"], api.META["dataset_version"])
+        sensors = data["sensor_catalog"]
+        expected = [column for column in api.contract.SCHEMA["columns"] if "sensor_id" in column]
+        self.assertEqual(sensors, expected)
+        self.assertEqual(len(sensors), 21)
+        self.assertEqual(data["sensor_count"], len(sensors))
+        self.assertEqual(data["splits"], data["available_splits"])
+        self.assertEqual(data["sensors"], sensors)
         self.assertEqual([(s["sensor_id"], s["column_name"], s["column_position"], s["source_field"])
                           for s in sensors], [(i, f"sensor_{i}", i + 5, i + 5) for i in range(1, 22)])
 
@@ -125,6 +146,7 @@ class ApiTests(unittest.TestCase):
         body = self.fetch("/api/units?split=" + split)
         self.assertEqual(body["data"]["split"], split)
         self.assertEqual(body["data"]["unit_ids"], list(range(1, 101)))
+        self.assertEqual(body["data"]["unit_count"], len(body["data"]["unit_ids"]))
         self.assertEqual(body["provenance"]["sources"][0]["source_filename"], f"{split}_FD001.txt")
 
     def test_train_units(self):
@@ -132,6 +154,35 @@ class ApiTests(unittest.TestCase):
 
     def test_test_units(self):
         self.check_units("test")
+
+    def reject_invalid_fields(self, path, wrong_types):
+        body = self.fetch(path)
+        schema = self.schemas["success"]
+        for field, wrong_type in wrong_types.items():
+            data = body["data"]
+            with self.subTest(field=field, case="missing"):
+                candidate = {**body, "data": {key: value for key, value in data.items() if key != field}}
+                self.assertFalse(schema.is_valid(candidate))
+            for case, value in (("wrong type", wrong_type), ("null", None)):
+                with self.subTest(field=field, case=case):
+                    candidate = {**body, "data": {**data, field: value}}
+                    self.assertFalse(schema.is_valid(candidate))
+
+    def test_health_schema_required_fields(self):
+        self.reject_invalid_fields("/api/health", {
+            "schema_version": 1, "source_verified": "true", "source_status": False, "read_only": 1,
+        })
+
+    def test_catalog_schema_required_fields(self):
+        self.reject_invalid_fields("/api/catalog", {
+            "schema_version": 1, "available_splits": "train", "sensor_catalog": {},
+            "sensor_count": "21", "source_version": [],
+        })
+
+    def test_units_schema_required_fields(self):
+        for split in ("train", "test"):
+            with self.subTest(split=split):
+                self.reject_invalid_fields(f"/api/units?split={split}", {"unit_count": "100"})
 
     def compare_history(self, path, split, unit, sensor, start, end):
         body = self.fetch(path)

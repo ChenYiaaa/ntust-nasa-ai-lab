@@ -126,12 +126,32 @@
             "dataset_id": {
               "const": "FD001"
             },
+            "schema_version": {
+              "type": "string",
+              "const": "1.0.0"
+            },
+            "source_verified": {
+              "type": "boolean",
+              "const": true
+            },
+            "source_status": {
+              "type": "string",
+              "const": "VERIFIED_LOCAL_SOURCE"
+            },
+            "read_only": {
+              "type": "boolean",
+              "const": true
+            },
             "service": {
               "const": "ready"
             }
           },
           "required": [
             "dataset_id",
+            "schema_version",
+            "source_verified",
+            "source_status",
+            "read_only",
             "service"
           ],
           "additionalProperties": false
@@ -188,6 +208,33 @@
                 "test"
               ]
             },
+            "schema_version": {
+              "type": "string",
+              "const": "1.0.0"
+            },
+            "available_splits": {
+              "type": "array",
+              "const": [
+                "train",
+                "test"
+              ]
+            },
+            "sensor_catalog": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/sensor"
+              },
+              "minItems": 21,
+              "maxItems": 21
+            },
+            "sensor_count": {
+              "type": "integer",
+              "const": 21
+            },
+            "source_version": {
+              "type": "string",
+              "const": "FD001_SHA256_PINNED_V1"
+            },
             "sensors": {
               "type": "array",
               "items": {
@@ -200,6 +247,11 @@
           "required": [
             "dataset_id",
             "splits",
+            "schema_version",
+            "available_splits",
+            "sensor_catalog",
+            "sensor_count",
+            "source_version",
             "sensors"
           ],
           "additionalProperties": false
@@ -260,6 +312,10 @@
                 "test"
               ]
             },
+            "unit_count": {
+              "type": "integer",
+              "const": 100
+            },
             "unit_ids": {
               "type": "array",
               "items": {
@@ -273,6 +329,7 @@
           "required": [
             "dataset_id",
             "split",
+            "unit_count",
             "unit_ids"
           ],
           "additionalProperties": false

@@ -1,5 +1,36 @@
 # WO-M3-WEB-001 verification
 
+## WO-M3-WEB-001-CORR-01
+
+The live API returned HTTP 200 with the complete Health, Catalog and Units
+response data. Health reported the verified, read-only snapshot. Catalog's 21
+sensor definitions matched the accepted column schema, its source version
+matched the M2 dataset metadata and the compatibility aliases matched both
+canonical arrays. Train and Test each returned 100 sorted observed IDs and a
+count equal to the length of the selected list.
+
+The Draft 2020-12 success schema requires and constrains all 10 new fields.
+The suite used explicit field names independent of the schema and rejected
+individual omissions, wrong types and nulls for every new field, including
+`unit_count` in both splits (33 negative cases). The History success definition
+and existing error schema continue to validate the full set of tested responses.
+
+All 20 HTTP test methods succeeded, including the 17 existing regressions.
+They covered missing and malformed queries, all six M2 error codes, isolated
+missing and mismatched sources, invalid RUL mapping, non-finite values and
+read-only routing. The M2 validator repeated all 35 checks and confirmed the
+three source SHA-256 values remained stable and matched the pins below.
+
+The full Train History request matched **20/20** and the accepted Test request
+matched **3/3**, both over live HTTP with zero tolerance. The independent TXT
+parser verified the value, Cycle, logical record index, physical line, column
+12, filename, digest and query provenance. Both responses preserved ascending
+Cycles. Detailed comparisons are in the ignored local-only evidence directory.
+The [execution record](execution.md) contains the six-file manifest, commands,
+exit codes and snapshot verification scope.
+
+## Original verification
+
 The separately launched local service returned HTTP 200 for Train Unit 1,
 Sensor 7, Cycles 1–20. All **20 of 20** observations matched the raw Train TXT
 exactly. Test Unit 2, Sensor 7, Cycles 3–5 also matched its own file **3 of 3**.

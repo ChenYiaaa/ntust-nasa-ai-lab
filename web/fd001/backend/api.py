@@ -115,18 +115,35 @@ def create_app(source_dir=SOURCE_DIR):
     @app.get("/api/health")
     def health():
         parameters()
-        return success({"service": "ready"}, META["source_files"])
+        return success({
+            "schema_version": META["schema_version"],
+            "service": "ready",
+            "source_verified": True,
+            "source_status": contract.RAW_VERIFIED,
+            "read_only": True,
+        }, META["source_files"])
 
     @app.get("/api/catalog")
     def catalog():
         parameters()
-        return success({"splits": META["available_splits"], **snapshot.sensors()},
-                       META["source_files"], metadata_source="fd001_column_schema.json")
+        splits = META["available_splits"]
+        sensors = snapshot.sensors()["sensors"]
+        return success({
+            "schema_version": META["schema_version"],
+            "available_splits": splits,
+            "sensor_catalog": sensors,
+            "sensor_count": len(sensors),
+            "source_version": META["dataset_version"],
+            "splits": splits,
+            "sensors": sensors,
+        }, META["source_files"], metadata_source="fd001_column_schema.json")
 
     @app.get("/api/units")
     def units():
         split = parameters("split")["split"]
-        return success(snapshot.units(split), [split], split=split, column_name="unit_id",
+        data = snapshot.units(split)
+        data["unit_count"] = len(data["unit_ids"])
+        return success(data, [split], split=split, column_name="unit_id",
                        column_position=1)
 
     @app.get("/api/history")

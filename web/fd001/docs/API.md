@@ -27,9 +27,9 @@ All paths below use `http://127.0.0.1:8765`. A successful GET returns HTTP 200.
 
 | GET | Data | Gate C source |
 | --- | --- | --- |
-| `/api/health` | Dataset ID and snapshot readiness | Construction of `FD001`, including verification of Train, Test and RUL |
-| `/api/catalog` | Split names and the 21 original sensor metadata entries | Contract metadata and `FD001.sensors()` |
-| `/api/units?split=test` | Split and sorted observed Unit IDs | `FD001.units(split)` |
+| `/api/health` | Verified source and read-only service status | Construction of `FD001`, including verification of Train, Test and RUL |
+| `/api/catalog` | Available splits, sensor metadata and source version | Contract metadata and `FD001.sensors()` |
+| `/api/units?split=test` | Split, sorted observed Unit IDs and count | `FD001.units(split)` |
 | `/api/history?split=train&unit=1&sensor=7&start=1&end=20` | Inclusive cycle range, count and ordered source points | `FD001.sensor(split, unit_id, sensor_id, cycle_start, cycle_end)` |
 
 Werkzeug serves the loopback socket, Flask validates HTTP parameters and the
@@ -44,7 +44,22 @@ The other M2 operations (`unit`, `trend` and `rul`) have no public HTTP route.
 
 [Success schema](success.schema.json) and [error schema](error.schema.json)
 use JSON Schema Draft 2020-12. Success contains `status: "ok"`, `data` and
-`provenance`. The common provenance fields give the contract version, source
+`provenance`. Every success includes the string `data.dataset_id` with value `FD001`.
+The following endpoint fields in `data` are required and non-null.
+
+- Health returns string `schema_version` (`1.0.0`), `service` (`ready`) and
+  `source_status` (`VERIFIED_LOCAL_SOURCE`). Boolean `source_verified` and
+  `read_only` are both true after successful snapshot verification.
+- Catalog returns string `schema_version` (`1.0.0`), string array
+  `available_splits` (`["train", "test"]`), object array `sensor_catalog` and
+  integer `sensor_count` derived from that array (21). String `source_version`
+  comes from the accepted dataset metadata (`FD001_SHA256_PINNED_V1`).
+  The existing `splits` and `sensors` names alias the canonical arrays.
+- Units returns string `split`, integer array `unit_ids` and integer
+  `unit_count` derived from the selected split's observed IDs (100 for each
+  split in the accepted snapshot).
+
+The common provenance fields give the contract version, source
 filenames and content hashes, and snapshot verification status. Health and
 Catalog list all three verified files. Catalog identifies the column schema
 for its sensor metadata. Units identifies the selected file and Unit ID column.
