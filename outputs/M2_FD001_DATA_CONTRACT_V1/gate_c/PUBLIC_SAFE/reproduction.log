@@ -1,0 +1,4 @@
+Reran validate_contract.py with --output set to an independent ignored local directory.
+Compared the relative paths and bytes of all 3 JSON artifacts with the first run.
+Both public JSON files also matched the checked-in candidates.
+Analysis exit_code=0; comparison exit_code=0.

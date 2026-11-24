@@ -1,0 +1,189 @@
+{
+  "schema_version": "1.0.0",
+  "source_sha256": {
+    "train": "963b5e22825b34d8b21c69e1aeb4af3e647050eb672ee8834ba4b5d91d2de0f8",
+    "test": "3cda7109ce17bafb5443f2ac926cfcf88154b941b8c4cf95eb55d1ddd6f52851",
+    "rul": "a19c8ec94931949d0485bdc35118206e9c81c4547b422efb9cf86f4ceddbceca"
+  },
+  "total": 35,
+  "passed": 35,
+  "failed": 0,
+  "checks": [
+    {
+      "check_name": "JSON metadata, schema and error contract versions",
+      "status": "PASS",
+      "method": "Strict JSON decode and 3 document version comparison"
+    },
+    {
+      "check_name": "metadata required keys",
+      "status": "PASS",
+      "method": "Contract keys"
+    },
+    {
+      "check_name": "source pins and row-count metadata agree with Gate A",
+      "status": "PASS",
+      "method": "Gate A accepted inventory vs Gate C contract"
+    },
+    {
+      "check_name": "affinity and schema fields",
+      "status": "PASS",
+      "method": "Required column fields and logical types"
+    },
+    {
+      "check_name": "column positions and Train/Test schema",
+      "status": "PASS",
+      "method": "Gate A accepted schema cross-check"
+    },
+    {
+      "check_name": "source SHA-256 before execution",
+      "status": "PASS",
+      "method": "Independent streaming file hash"
+    },
+    {
+      "check_name": "sensor listing and 1-based mapping",
+      "status": "PASS",
+      "method": "API vs physical schema offsets"
+    },
+    {
+      "check_name": "train observed units",
+      "status": "PASS",
+      "method": "Binary regex and independent grouping vs API"
+    },
+    {
+      "check_name": "train all unit boundaries and locators",
+      "status": "PASS",
+      "method": "All Units grouped from binary raw lines"
+    },
+    {
+      "check_name": "train inclusive sensor samples",
+      "status": "PASS",
+      "method": "All sample records reconciled against independent raw tokens"
+    },
+    {
+      "check_name": "train Gate A raw locator",
+      "status": "PASS",
+      "method": "Accepted locator CLI vs Gate C direct read"
+    },
+    {
+      "check_name": "train Gate B trend reproduction",
+      "status": "PASS",
+      "method": "Gate B accepted NumPy OLS and statistics vs Python statistics"
+    },
+    {
+      "check_name": "train single-cycle boundary",
+      "status": "PASS",
+      "method": "Inclusive single-cycle query with explicit OLS applicability"
+    },
+    {
+      "check_name": "train constant slope",
+      "status": "PASS",
+      "method": "Gate B constant Sensor 1 reproduced"
+    },
+    {
+      "check_name": "test observed units",
+      "status": "PASS",
+      "method": "Binary regex and independent grouping vs API"
+    },
+    {
+      "check_name": "test all unit boundaries and locators",
+      "status": "PASS",
+      "method": "All Units grouped from binary raw lines"
+    },
+    {
+      "check_name": "test inclusive sensor samples",
+      "status": "PASS",
+      "method": "All sample records reconciled against independent raw tokens"
+    },
+    {
+      "check_name": "test Gate A raw locator",
+      "status": "PASS",
+      "method": "Accepted locator CLI vs Gate C direct read"
+    },
+    {
+      "check_name": "test Gate B trend reproduction",
+      "status": "PASS",
+      "method": "Gate B accepted NumPy OLS and statistics vs Python statistics"
+    },
+    {
+      "check_name": "test single-cycle boundary",
+      "status": "PASS",
+      "method": "Inclusive single-cycle query with explicit OLS applicability"
+    },
+    {
+      "check_name": "test constant slope",
+      "status": "PASS",
+      "method": "Gate B constant Sensor 1 reproduced"
+    },
+    {
+      "check_name": "all RUL rank mappings",
+      "status": "PASS",
+      "method": "Independently sorted Unit IDs and binary RUL record sequence vs query API"
+    },
+    {
+      "check_name": "RUL mapping convention agrees with accepted Gate A",
+      "status": "PASS",
+      "method": "Accepted format convention comparison"
+    },
+    {
+      "check_name": "RUL value source locator",
+      "status": "PASS",
+      "method": "Accepted locator reads RUL raw record and SHA-256"
+    },
+    {
+      "check_name": "INVALID_SPLIT",
+      "status": "PASS",
+      "method": "Expected INVALID_SPLIT and complete error envelope"
+    },
+    {
+      "check_name": "train RUL unavailable",
+      "status": "PASS",
+      "method": "Expected INVALID_SPLIT and complete error envelope"
+    },
+    {
+      "check_name": "UNKNOWN_UNIT",
+      "status": "PASS",
+      "method": "Expected UNKNOWN_UNIT and complete error envelope"
+    },
+    {
+      "check_name": "UNKNOWN_SENSOR",
+      "status": "PASS",
+      "method": "Expected UNKNOWN_SENSOR and complete error envelope"
+    },
+    {
+      "check_name": "CYCLE_OUT_OF_RANGE",
+      "status": "PASS",
+      "method": "Expected CYCLE_OUT_OF_RANGE and complete error envelope"
+    },
+    {
+      "check_name": "inverted cycle range",
+      "status": "PASS",
+      "method": "Expected CYCLE_OUT_OF_RANGE and complete error envelope"
+    },
+    {
+      "check_name": "SOURCE_NOT_VERIFIED",
+      "status": "PASS",
+      "method": "Expected SOURCE_NOT_VERIFIED and complete error envelope"
+    },
+    {
+      "check_name": "RUL_MAPPING_INVALID",
+      "status": "PASS",
+      "method": "Expected RUL_MAPPING_INVALID and complete error envelope"
+    },
+    {
+      "check_name": "CLI sensor JSON and exit code",
+      "status": "PASS",
+      "method": "Actual subprocess and local API parity"
+    },
+    {
+      "check_name": "CLI error JSON and exit code",
+      "status": "PASS",
+      "method": "Actual subprocess structured error"
+    },
+    {
+      "check_name": "source SHA-256 after execution",
+      "status": "PASS",
+      "method": "Independent streaming file hash"
+    }
+  ],
+  "worker_validation": "PASS"
+}

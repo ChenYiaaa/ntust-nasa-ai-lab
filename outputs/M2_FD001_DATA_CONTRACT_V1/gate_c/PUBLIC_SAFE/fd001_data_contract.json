@@ -1,0 +1,165 @@
+{
+  "dataset_id": "FD001",
+  "dataset_name": "NASA C-MAPSS FD001",
+  "dataset_version": "FD001_SHA256_PINNED_V1",
+  "schema_version": "1.0.0",
+  "source_files": {
+    "train": "train_FD001.txt",
+    "test": "test_FD001.txt",
+    "rul": "RUL_FD001.txt"
+  },
+  "source_sha256": {
+    "train": "963b5e22825b34d8b21c69e1aeb4af3e647050eb672ee8834ba4b5d91d2de0f8",
+    "test": "3cda7109ce17bafb5443f2ac926cfcf88154b941b8c4cf95eb55d1ddd6f52851",
+    "rul": "a19c8ec94931949d0485bdc35118206e9c81c4547b422efb9cf86f4ceddbceca"
+  },
+  "available_splits": [
+    "train",
+    "test"
+  ],
+  "row_counts": {
+    "train": 20631,
+    "test": 13096,
+    "rul": 100
+  },
+  "unit_counts": {
+    "train": 100,
+    "test": 100
+  },
+  "sensor_count": 21,
+  "verification_status": {
+    "raw_source": "SHA256_PINNED",
+    "worker_local_execution": "SEE_CONTRACT_VALIDATION",
+    "research_github_evidence": {
+      "gate_a": "PASS",
+      "gate_b": "PASS",
+      "gate_c": "PENDING_BRAIN_ACCEPTANCE"
+    }
+  },
+  "verification_basis": {
+    "gate_a_commit": "c47df8eebf95e1b6d487e81c657863e65a170564",
+    "gate_b_commit": "ac4f97b220a6ec895c6cc0f18782190fefb45a82",
+    "gate_c": "Worker execution against authorized local TXT; Research acceptance of prior GitHub evidence is distinct from raw source execution."
+  },
+  "operations": {
+    "units": {
+      "input": [
+        "split"
+      ],
+      "output": [
+        "split",
+        "unit_ids"
+      ]
+    },
+    "sensors": {
+      "input": [],
+      "output": [
+        "sensors"
+      ]
+    },
+    "unit": {
+      "input": [
+        "split",
+        "unit_id"
+      ],
+      "output": [
+        "split",
+        "unit_id",
+        "first_cycle",
+        "last_observed_cycle",
+        "cycle_count",
+        "source_filename",
+        "source_sha256",
+        "source_locator"
+      ]
+    },
+    "sensor": {
+      "input": [
+        "split",
+        "unit_id",
+        "sensor_id",
+        "cycle_start",
+        "cycle_end"
+      ],
+      "output_item": [
+        "dataset_id",
+        "split",
+        "unit_id",
+        "sensor_id",
+        "cycle",
+        "value",
+        "source_filename",
+        "source_sha256",
+        "source_record_index",
+        "source_physical_line",
+        "column_name",
+        "column_position",
+        "verification_status",
+        "evidence"
+      ],
+      "range": "Both endpoints inclusive; ascending observed cycles; explicit error for missing cycle."
+    },
+    "rul": {
+      "input": [
+        "split",
+        "unit_id"
+      ],
+      "output": [
+        "unit_id",
+        "last_observed_cycle",
+        "rul_at_last_observation",
+        "rul_source_record_index",
+        "mapping_basis",
+        "source_sha256",
+        "verification_status"
+      ]
+    },
+    "trend": {
+      "input": [
+        "split",
+        "unit_id",
+        "sensor_id",
+        "cycle_start",
+        "cycle_end"
+      ],
+      "output": [
+        "observation_count",
+        "missing_count",
+        "minimum",
+        "maximum",
+        "mean",
+        "standard_deviation",
+        "trend_slope",
+        "slope_reason",
+        "slope_unit",
+        "evidence"
+      ]
+    }
+  },
+  "evidence": {
+    "required": [
+      "source_filename",
+      "source_sha256",
+      "split",
+      "unit_id",
+      "cycle_or_cycle_range",
+      "sensor_id",
+      "source_row_reference",
+      "calculation_method",
+      "verification_status"
+    ],
+    "index_base": 1,
+    "trend_method": "OLS with intercept; X=Cycle; Y=Sensor value; sample standard deviation ddof=1; finite pairs only",
+    "physical_units": "UNKNOWN"
+  },
+  "rul": {
+    "mapping_status": "VERIFIED_BY_REFERENCE_CONVENTION",
+    "mapping_basis": "MW_FD001_SORTED_ID",
+    "rule": "RUL logical record i belongs to the ith test Unit ID in ascending order.",
+    "native_unit_key": false,
+    "train_support": false,
+    "per_cycle_derivation_supported": false,
+    "test_last_cycle": "Last observation",
+    "reference": "https://it.mathworks.com/help/predmaint/ug/remaining-useful-life-estimation-using-convolutional-neural-network.html"
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "train": {
+    "dataset_id": "FD001",
+    "split": "train",
+    "unit_id": 1,
+    "sensor_id": 2,
+    "cycle_start": 1,
+    "cycle_end": 192,
+    "verified_observations": 192,
+    "source_filename": "train_FD001.txt",
+    "source_sha256": "963b5e22825b34d8b21c69e1aeb4af3e647050eb672ee8834ba4b5d91d2de0f8",
+    "verification_status": "PASS",
+    "trend_slope": 0.006073603613379281
+  },
+  "test": {
+    "dataset_id": "FD001",
+    "split": "test",
+    "unit_id": 1,
+    "sensor_id": 2,
+    "cycle_start": 1,
+    "cycle_end": 31,
+    "verified_observations": 31,
+    "source_filename": "test_FD001.txt",
+    "source_sha256": "3cda7109ce17bafb5443f2ac926cfcf88154b941b8c4cf95eb55d1ddd6f52851",
+    "verification_status": "PASS",
+    "trend_slope": 0.0014758064516130279
+  },
+  "rul": {
+    "unit_id": 1,
+    "last_observed_cycle": 31,
+    "rul_source_record_index": 1,
+    "mapping_basis": "MW_FD001_SORTED_ID",
+    "source_sha256": "a19c8ec94931949d0485bdc35118206e9c81c4547b422efb9cf86f4ceddbceca",
+    "verification_status": "VERIFIED_BY_REFERENCE_CONVENTION"
+  },
+  "evidence": {
+    "source_filename": "train_FD001.txt",
+    "source_sha256": "963b5e22825b34d8b21c69e1aeb4af3e647050eb672ee8834ba4b5d91d2de0f8",
+    "split": "train",
+    "unit_id": 1,
+    "cycle_or_cycle_range": 1,
+    "sensor_id": 2,
+    "calculation_method": "Direct parse of verified ASCII source",
+    "verification_status": "VERIFIED_LOCAL_SOURCE",
+    "source_row_reference": {
+      "index_base": 1,
+      "column_position": 7,
+      "locator_key": {
+        "split": "train",
+        "unit_id": 1,
+        "cycle": 1,
+        "sensor_id": 2
+      },
+      "matched_physical_line_and_record_index": true
+    }
+  }
+}

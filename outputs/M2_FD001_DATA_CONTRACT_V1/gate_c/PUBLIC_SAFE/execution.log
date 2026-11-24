@@ -1,0 +1,4 @@
+command=python outputs/M2_FD001_DATA_CONTRACT_V1/gate_c/PUBLIC_SAFE/validate_contract.py --output outputs/M2_FD001_DATA_CONTRACT_V1/gate_c/local_only/run
+Python 3.12.14 / NumPy 2.3.5 (Gate A locator only) / schema 1.0.0
+35 checks passed; Train/Test sensor and trend, 100 RUL mappings, 6 error codes, source hashes stable
+exit_code=0

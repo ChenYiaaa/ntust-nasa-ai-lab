@@ -1,0 +1,275 @@
+{
+  "schema_version": "1.0.0",
+  "applies_to": [
+    "train",
+    "test"
+  ],
+  "columns": [
+    {
+      "column_name": "unit_id",
+      "column_position": 1,
+      "dtype": "integer",
+      "semantic_role": "engine_identifier",
+      "unit_of_measure_if_known": "NOT_APPLICABLE",
+      "nullable": false,
+      "source_field": 1
+    },
+    {
+      "column_name": "cycle",
+      "column_position": 2,
+      "dtype": "integer",
+      "semantic_role": "time_index",
+      "unit_of_measure_if_known": "Cycle",
+      "nullable": false,
+      "source_field": 2
+    },
+    {
+      "column_name": "setting_1",
+      "column_position": 3,
+      "dtype": "number",
+      "semantic_role": "operational_setting",
+      "unit_of_measure_if_known": "UNKNOWN",
+      "nullable": false,
+      "source_field": 3
+    },
+    {
+      "column_name": "setting_2",
+      "column_position": 4,
+      "dtype": "number",
+      "semantic_role": "operational_setting",
+      "unit_of_measure_if_known": "UNKNOWN",
+      "nullable": false,
+      "source_field": 4
+    },
+    {
+      "column_name": "setting_3",
+      "column_position": 5,
+      "dtype": "number",
+      "semantic_role": "operational_setting",
+      "unit_of_measure_if_known": "UNKNOWN",
+      "nullable": false,
+      "source_field": 5
+    },
+    {
+      "column_name": "sensor_1",
+      "column_position": 6,
+      "dtype": "number",
+      "semantic_role": "sensor",
+      "unit_of_measure_if_known": "UNKNOWN",
+      "nullable": false,
+      "source_field": 6,
+      "sensor_id": 1
+    },
+    {
+      "column_name": "sensor_2",
+      "column_position": 7,
+      "dtype": "number",
+      "semantic_role": "sensor",
+      "unit_of_measure_if_known": "UNKNOWN",
+      "nullable": false,
+      "source_field": 7,
+      "sensor_id": 2
+    },
+    {
+      "column_name": "sensor_3",
+      "column_position": 8,
+      "dtype": "number",
+      "semantic_role": "sensor",
+      "unit_of_measure_if_known": "UNKNOWN",
+      "nullable": false,
+      "source_field": 8,
+      "sensor_id": 3
+    },
+    {
+      "column_name": "sensor_4",
+      "column_position": 9,
+      "dtype": "number",
+      "semantic_role": "sensor",
+      "unit_of_measure_if_known": "UNKNOWN",
+      "nullable": false,
+      "source_field": 9,
+      "sensor_id": 4
+    },
+    {
+      "column_name": "sensor_5",
+      "column_position": 10,
+      "dtype": "number",
+      "semantic_role": "sensor",
+      "unit_of_measure_if_known": "UNKNOWN",
+      "nullable": false,
+      "source_field": 10,
+      "sensor_id": 5
+    },
+    {
+      "column_name": "sensor_6",
+      "column_position": 11,
+      "dtype": "number",
+      "semantic_role": "sensor",
+      "unit_of_measure_if_known": "UNKNOWN",
+      "nullable": false,
+      "source_field": 11,
+      "sensor_id": 6
+    },
+    {
+      "column_name": "sensor_7",
+      "column_position": 12,
+      "dtype": "number",
+      "semantic_role": "sensor",
+      "unit_of_measure_if_known": "UNKNOWN",
+      "nullable": false,
+      "source_field": 12,
+      "sensor_id": 7
+    },
+    {
+      "column_name": "sensor_8",
+      "column_position": 13,
+      "dtype": "number",
+      "semantic_role": "sensor",
+      "unit_of_measure_if_known": "UNKNOWN",
+      "nullable": false,
+      "source_field": 13,
+      "sensor_id": 8
+    },
+    {
+      "column_name": "sensor_9",
+      "column_position": 14,
+      "dtype": "number",
+      "semantic_role": "sensor",
+      "unit_of_measure_if_known": "UNKNOWN",
+      "nullable": false,
+      "source_field": 14,
+      "sensor_id": 9
+    },
+    {
+      "column_name": "sensor_10",
+      "column_position": 15,
+      "dtype": "number",
+      "semantic_role": "sensor",
+      "unit_of_measure_if_known": "UNKNOWN",
+      "nullable": false,
+      "source_field": 15,
+      "sensor_id": 10
+    },
+    {
+      "column_name": "sensor_11",
+      "column_position": 16,
+      "dtype": "number",
+      "semantic_role": "sensor",
+      "unit_of_measure_if_known": "UNKNOWN",
+      "nullable": false,
+      "source_field": 16,
+      "sensor_id": 11
+    },
+    {
+      "column_name": "sensor_12",
+      "column_position": 17,
+      "dtype": "number",
+      "semantic_role": "sensor",
+      "unit_of_measure_if_known": "UNKNOWN",
+      "nullable": false,
+      "source_field": 17,
+      "sensor_id": 12
+    },
+    {
+      "column_name": "sensor_13",
+      "column_position": 18,
+      "dtype": "number",
+      "semantic_role": "sensor",
+      "unit_of_measure_if_known": "UNKNOWN",
+      "nullable": false,
+      "source_field": 18,
+      "sensor_id": 13
+    },
+    {
+      "column_name": "sensor_14",
+      "column_position": 19,
+      "dtype": "number",
+      "semantic_role": "sensor",
+      "unit_of_measure_if_known": "UNKNOWN",
+      "nullable": false,
+      "source_field": 19,
+      "sensor_id": 14
+    },
+    {
+      "column_name": "sensor_15",
+      "column_position": 20,
+      "dtype": "number",
+      "semantic_role": "sensor",
+      "unit_of_measure_if_known": "UNKNOWN",
+      "nullable": false,
+      "source_field": 20,
+      "sensor_id": 15
+    },
+    {
+      "column_name": "sensor_16",
+      "column_position": 21,
+      "dtype": "number",
+      "semantic_role": "sensor",
+      "unit_of_measure_if_known": "UNKNOWN",
+      "nullable": false,
+      "source_field": 21,
+      "sensor_id": 16
+    },
+    {
+      "column_name": "sensor_17",
+      "column_position": 22,
+      "dtype": "number",
+      "semantic_role": "sensor",
+      "unit_of_measure_if_known": "UNKNOWN",
+      "nullable": false,
+      "source_field": 22,
+      "sensor_id": 17
+    },
+    {
+      "column_name": "sensor_18",
+      "column_position": 23,
+      "dtype": "number",
+      "semantic_role": "sensor",
+      "unit_of_measure_if_known": "UNKNOWN",
+      "nullable": false,
+      "source_field": 23,
+      "sensor_id": 18
+    },
+    {
+      "column_name": "sensor_19",
+      "column_position": 24,
+      "dtype": "number",
+      "semantic_role": "sensor",
+      "unit_of_measure_if_known": "UNKNOWN",
+      "nullable": false,
+      "source_field": 24,
+      "sensor_id": 19
+    },
+    {
+      "column_name": "sensor_20",
+      "column_position": 25,
+      "dtype": "number",
+      "semantic_role": "sensor",
+      "unit_of_measure_if_known": "UNKNOWN",
+      "nullable": false,
+      "source_field": 25,
+      "sensor_id": 20
+    },
+    {
+      "column_name": "sensor_21",
+      "column_position": 26,
+      "dtype": "number",
+      "semantic_role": "sensor",
+      "unit_of_measure_if_known": "UNKNOWN",
+      "nullable": false,
+      "source_field": 26,
+      "sensor_id": 21
+    }
+  ],
+  "rul_columns": [
+    {
+      "column_name": "final_RUL",
+      "column_position": 1,
+      "dtype": "integer",
+      "semantic_role": "remaining_life_at_test_last_observation",
+      "unit_of_measure_if_known": "Cycle",
+      "nullable": false,
+      "source_field": 1
+    }
+  ]
+}

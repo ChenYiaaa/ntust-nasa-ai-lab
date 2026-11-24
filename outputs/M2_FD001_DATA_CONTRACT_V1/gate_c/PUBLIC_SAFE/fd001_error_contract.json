@@ -1,0 +1,36 @@
+{
+  "schema_version": "1.0.0",
+  "error_envelope": [
+    "error_code",
+    "message",
+    "input_context",
+    "recoverability"
+  ],
+  "cli_exit_code": 2,
+  "errors": {
+    "INVALID_SPLIT": {
+      "message": "Choose train or test for telemetry and test for RUL.",
+      "recoverability": "CORRECT_INPUT"
+    },
+    "UNKNOWN_UNIT": {
+      "message": "Unit ID does not exist in the requested split.",
+      "recoverability": "CORRECT_INPUT"
+    },
+    "UNKNOWN_SENSOR": {
+      "message": "Sensor ID is outside the verified schema.",
+      "recoverability": "CORRECT_INPUT"
+    },
+    "CYCLE_OUT_OF_RANGE": {
+      "message": "Cycle endpoints must be integers in the observed range, ordered and present.",
+      "recoverability": "CORRECT_INPUT"
+    },
+    "SOURCE_NOT_VERIFIED": {
+      "message": "Authorized source is unreadable, its SHA-256 differs, or its verified structure is invalid.",
+      "recoverability": "RESTORE_AUTHORIZED_SOURCE"
+    },
+    "RUL_MAPPING_INVALID": {
+      "message": "RUL records cannot be paired with the verified ascending test unit IDs.",
+      "recoverability": "REVALIDATE_SOURCE_AND_MAPPING"
+    }
+  }
+}
