@@ -49,6 +49,43 @@
 
 STUDENT-MAIN Brain 正式驗收 `WO-M0-001` 為 `PASS`。`WO-M0-002` 依 MAIN Brain 的正式授權同步此驗收結果。
 
+## M1_DATASET_PROFILE_6CSV_V1
+
+| 欄位 | 值 |
+| --- | --- |
+| WORK_ITEM_ID | `M1_DATASET_PROFILE_6CSV_V1` |
+| TYPE | `BRAIN_TO_BRAIN_WORK_ORDER` |
+| ASSIGNEE | STUDENT-RESEARCH Brain |
+| RESEARCH_DECISION | `PASS` |
+| MAIN_DECISION | `PASS` |
+| STATUS | `PASS` |
+| ACCEPTED_COMMIT | `ea112bd4f9daac2c95006cc5dc95da70831d9772` |
+
+- **EVIDENCE** — 驗收已核對 GitHub `main` 的 Commit SHA 與 6 份授權研究交付物。核對範圍涵蓋 Dataset Inventory、Dataset Profile、Data Quality Report、可重現程式、Execution Log 及交付說明。範圍為 1 個合成 CSV Dataset、6 筆資料與 4 個欄位，Research Domain Acceptance 與 MAIN Final Acceptance 均為 `PASS`。
+- **LIMITATION** — MAIN Brain 未直接重跑私人原始 CSV。驗收依據為 GitHub 上的程式、執行證據與交付物一致性審查。
+
+## M2_FD001_DATA_CONTRACT_V1
+
+| 欄位 | 值 |
+| --- | --- |
+| WORK_ITEM_ID | `M2_FD001_DATA_CONTRACT_V1` |
+| TYPE | `BRAIN_TO_BRAIN_WORK_ORDER` |
+| ASSIGNEE / RESPONSIBLE_BRAIN | STUDENT-RESEARCH Brain |
+| OWNER_APPROVAL | `GRANTED` |
+| STATUS | `AUTHORIZED_NOT_STARTED` |
+| RESEARCH_WORKER | `NOT_DISPATCHED` |
+| GATE_A | `NOT_STARTED` |
+| GATE_B | `NOT_STARTED` |
+| GATE_C | `NOT_STARTED` |
+
+- **OBJECTIVE** — 先驗證本地三份 NASA C-MAPSS FD001 TXT，通過後執行 Trend / Quality Analysis，最後交付可追溯的 Data Contract。
+- **INPUT** — `train_FD001.txt`、`test_FD001.txt`、`RUL_FD001.txt`。
+- **EXPECTED_OUTPUT** — 本地來源與結構驗證證據、趨勢及資料品質分析結果，以及可追溯至 Engine Unit、Cycle、Sensor 和來源檔案的 Data Contract。
+- **STOP_IF** — 最新治理文件無法核對、前置治理同步尚未通過驗收、任一授權輸入無法驗證、前一 Gate 未通過，或需要修改或發布未授權的原始資料。
+- **RETURN_TO** — STUDENT-MAIN Brain。
+
+STUDENT-RESEARCH Brain 須先核對 GitHub `main` 上的最新治理文件，再依授權自行向其 RESEARCH Own Worker 派工。
+
 ## 後續工作單必填欄位
 
 | 欄位 | 填寫要求 |

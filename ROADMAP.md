@@ -15,18 +15,27 @@
 
 ## M1 — FIRST VERIFIED DATASET RETURN
 
-- **Status** — `AUTHORIZED_NOT_STARTED`。STUDENT 已授權 `M1_DATASET_PROFILE_6CSV_V1`，RESEARCH Own Worker 尚未開始執行。
+- **Status** — `PASS`。
+- **Work Item ID** — `M1_DATASET_PROFILE_6CSV_V1`。
+- **Research Decision / MAIN Decision** — `PASS` / `PASS`。
+- **Accepted Commit** — `ea112bd4f9daac2c95006cc5dc95da70831d9772`。
+- **Acceptance Scope** — 1 個合成 CSV Dataset、6 筆資料、4 個欄位與 6 份 GitHub 研究交付物。Research Domain Acceptance 與 MAIN Final Acceptance 均為 `PASS`。
+- **Acceptance Limitation** — MAIN Brain 未親自重新執行私人原始 CSV。驗收依據為 GitHub 上的程式、執行證據與交付物一致性審查。
 - **Goal** — 由 RESEARCH Brain 協調自己的 Worker，對六筆合成 CSV 資料建立可驗證的 Dataset Profile。
 - **Input** — 已知檔名 `synthetic_sensor.csv`、經授權的資料位置與六筆資料的來源或辨識方式。六筆的分布須依盤點證據判定，禁止假定有六個既存獨立檔案。
 - **Deliverables** — Dataset Profile、資料盤點、可重現的處理方式與實際執行證據。
 - **Responsible Brain** — RESEARCH Brain。
 - **Acceptance Criteria** — 每筆資料可追溯至實際來源。Profile 的 shape、columns、dtype、missing、duplicates 及 statistics 均有真實證據，且盤點清楚說明六筆資料的涵蓋方式。RESEARCH Brain 驗收後回報 MAIN Brain。
 - **STOP_IF** — 尚未授權、資料來源不可讀、無法用實際證據確認六筆的範圍，或無法重現任何必要欄位或統計。保留現有證據並回報缺口。
-- **Next Role** — RESEARCH Brain 驗收後回報 STUDENT-MAIN Brain，由 STUDENT 核准是否進入 M2。
+- **Next Role** — STUDENT-MAIN Brain 驗收 `WO-M1-002` 後，由 STUDENT-RESEARCH Brain 依 M2 授權與最新治理文件處理派工。
 
 ## M2 — NASA C-MAPSS FD001 DATA INTEGRATION
 
-- **Status** — `NOT_STARTED`。
+- **Status** — `AUTHORIZED_NOT_STARTED`。
+- **Work Item ID** — `M2_FD001_DATA_CONTRACT_V1`。
+- **Owner Approval** — `GRANTED`。
+- **Research Worker** — `NOT_DISPATCHED`。
+- **Gate A / Gate B / Gate C** — 均為 `NOT_STARTED`。
 - **Goal** — 接入學生本地 NASA C-MAPSS FD001 真實資料，建立 Engine Unit、Cycle、Sensor 索引與來源追溯。
 - **Input** — 學生授權的本地 FD001 檔案、資料規格與 M1 驗收紀錄。
 - **Deliverables** — 可重現的 FD001 資料讀取方式、欄位與索引對照、來源清單及抽樣驗證證據。
