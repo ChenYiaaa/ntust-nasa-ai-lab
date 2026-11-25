@@ -32,6 +32,9 @@ dd { margin: .3rem 0 0; font-variant-numeric: tabular-nums; overflow-wrap: anywh
 details { margin-top: 1rem; }
 summary { cursor: pointer; font-weight: 700; padding-block: .5rem; }
 .table-scroll { overflow-x: auto; }
+.prompt-actions { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: .8rem; }
+#prompt-preview { display: block; width: 100%; min-height: 9rem; resize: vertical; margin-top: .4rem;
+  padding: .65rem; border: 1px solid #879fa8; border-radius: 7px; color: inherit; font: .875rem ui-monospace, monospace; }
 table { border-collapse: collapse; width: 100%; text-align: left; }
 th, td { padding: .5rem; border-bottom: 1px solid #d7e3e7; }
 @media (max-width: 800px) { .controls { grid-template-columns: repeat(3, minmax(0, 1fr)); } }

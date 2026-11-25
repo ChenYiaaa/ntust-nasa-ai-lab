@@ -5,16 +5,59 @@ import { chromium } from './local_only/node_modules/playwright-core/index.mjs';
 
 const origin = 'http://127.0.0.1:8766';
 const privateDir = new URL('./local_only/', import.meta.url);
-const screenshot = new URL('../../../outputs/M3_FD001_HEALTH_WEBSITE_MVP_V1/frontend/PUBLIC_SAFE/browser-initial.png', import.meta.url);
+const screenshot = new URL('../../../outputs/M4_FD001_INTERACTIVE_EVIDENCE_WEB_V1/PUBLIC_SAFE/browser-initial.png', import.meta.url);
 await mkdir(new URL('.', screenshot), { recursive: true });
 const browser = await chromium.launch({ channel: 'msedge', headless: true });
 const page = await browser.newPage({ viewport: { width: 1240, height: 900 } });
+await page.context().grantPermissions(['clipboard-read', 'clipboard-write'], { origin });
 const unexpected = [], consoleErrors = [], evidence = {};
 page.on('pageerror', error => unexpected.push(error.message));
 page.on('console', message => { if (message.type() === 'error') consoleErrors.push(message.text()); });
 const select = (id, value) => page.locator('#' + id).selectOption(value);
 const visibleState = state => page.locator('#status[data-state="' + state + '"]').waitFor();
 const recap = label => console.log('OK', label);
+const generate = page.locator('#generate-prompt');
+const copy = page.locator('#copy-prompt');
+const preview = page.locator('#prompt-preview');
+
+async function promptCleared() {
+  assert.equal(await generate.isDisabled(), true);
+  assert.equal(await copy.isDisabled(), true);
+  assert.equal(await preview.inputValue(), '');
+}
+
+async function checkPrompt(actual, expected, points) {
+  assert.equal(await copy.isDisabled(), true);
+  await generate.click();
+  const text = await preview.inputValue();
+  const { data, provenance } = actual;
+  for (const [name, value] of Object.entries({
+    'Dataset ID': data.dataset_id, 'Contract version': provenance.contract_version, Split: data.split,
+    'Engine Unit ID': data.unit_id, 'Sensor ID': data.sensor_id, 'Cycle Start': data.cycle_start,
+    'Cycle End': data.cycle_end, 'Observation count': points.length,
+    'Source filename': provenance.sources[0].source_filename,
+    'Source SHA256': provenance.sources[0].source_sha256,
+    'Source verification status': 'VERIFIED_LOCAL_SOURCE',
+  })) assert.ok(text.split('\n').includes(name + ': ' + value), name);
+  assert.deepEqual(text.split('\n').filter(line => /^\d+ \|/.test(line))
+    .map(line => line.split(' | ').map(Number)), points.map(p =>
+      [p.cycle, p.value, p.source_record_index, p.source_physical_line, p.column_position]));
+  const labels = ['Count', 'Minimum', 'Maximum', 'Mean', 'Sample standard deviation', 'OLS trend slope', 'Missing count'];
+  expected.forEach((value, i) => {
+    const field = text.split('\n').find(line => line.startsWith(labels[i] + ': '));
+    assert.ok(field, 'Prompt statistic missing: ' + labels[i]);
+    const rendered = field.slice(labels[i].length + 2);
+    if (value === null) assert.equal(rendered, 'N/A');
+    else assert.ok(Math.abs(Number(rendered) - value) < 1e-7);
+  });
+  await copy.click();
+  await page.getByText('Copied to clipboard.', { exact: true }).waitFor();
+  const clipboard = await page.evaluate(() => navigator.clipboard.readText());
+  // Windows writes native CRLF to the clipboard. HTML textarea values use LF.
+  assert.ok(clipboard === text || (process.platform === 'win32' &&
+    clipboard === text.replaceAll('\n', '\r\n')), 'Clipboard differs from preview');
+  return text;
+}
 
 async function choose(split, unit) {
   const response = page.waitForResponse(r => r.url().endsWith('/api/units?split=' + split));
@@ -71,7 +114,8 @@ async function query(split, unit, start, end) {
   assert.deepEqual(await page.locator('#rows tr').evaluateAll(rows => rows.map(row =>
     Array.from(row.cells, cell => Number(cell.textContent)))), points.map(p =>
     [p.cycle, p.value, p.source_record_index, p.source_physical_line, p.column_position]));
-  evidence[split + '-' + n] = { actual, drawn, stats, expected };
+  const prompt = await checkPrompt(actual, expected, points);
+  evidence[split + '-' + n] = { actual, drawn, stats, expected, prompt };
   recap(split + ' ' + n + ' points, real canvas marks, statistics and provenance');
 }
 
@@ -89,7 +133,13 @@ try {
       return arc.apply(this, args);
     };
   });
+  const moduleRequest = page.waitForResponse(r => r.url() === origin + '/prompt.mjs');
   await page.goto(origin);
+  const moduleResponse = await moduleRequest;
+  assert.equal(moduleResponse.status(), 200);
+  assert.equal(moduleResponse.headers()['content-type'], 'text/javascript; charset=utf-8');
+  assert.equal(await preview.getAttribute('readonly'), '');
+  await promptCleared();
   await visibleState('initial');
   assert.equal(await page.locator('#unit').isDisabled(), true);
   assert.equal(await page.locator('#results').isHidden(), true);
@@ -100,6 +150,7 @@ try {
   await choose('train', '1');
   await query('train', 1, 1, 20);
   await choose('test', '2');
+  await promptCleared();
   assert.equal(await page.locator('#results').isHidden(), true);
   await query('test', 2, 3, 5);
   await query('test', 2, 3, 3);
@@ -143,6 +194,7 @@ try {
     await visibleState('error');
     assert.ok((await page.locator('#status').textContent()).includes(code));
     assert.equal(await page.locator('#results').isHidden(), true);
+    await promptCleared();
     await page.unroute(routePattern);
   }
   await page.route(routePattern, route => route.fulfill({ json: {
@@ -151,6 +203,7 @@ try {
   await page.locator('#run').click();
   await visibleState('empty');
   assert.equal(await page.locator('#results').isHidden(), true);
+  await promptCleared();
   await page.unroute(routePattern);
   recap('Controlled HTTP errors, network failure and empty result');
 
@@ -174,6 +227,51 @@ try {
   await page.waitForFunction(() => document.querySelector('#unit').options.length > 1);
   assert.equal(await page.locator('#split').inputValue(), 'train');
   recap('Private paths and write requests blocked, real HTTP error preserved, mobile and keyboard');
+  for (const path of ['/', '/style.css', '/app.mjs', '/model.mjs', '/prompt.mjs']) {
+    const response = await page.request.get(origin + path);
+    assert.equal(response.status(), 200);
+    assert.equal(response.headers()['cache-control'], 'no-store');
+    assert.equal(response.headers()['x-content-type-options'], 'nosniff');
+  }
+  for (const path of ['/nonexistent', '/prompt.mjs/extra', '/%2e%2e%2fprompt.mjs']) {
+    assert.equal((await page.request.get(origin + path)).status(), 404);
+  }
+  assert.equal((await page.request.get(origin, { headers: { host: 'invalid.example:8766' } })).status(), 400);
+  for (const path of ['/api/health', '/api/catalog', '/api/units?split=train',
+    '/api/history?split=train&unit=1&sensor=7&start=1&end=20']) {
+    const [via, direct] = await Promise.all([fetch(origin + path), fetch('http://127.0.0.1:8765' + path)]);
+    assert.equal(via.status, 200);
+    assert.equal(await via.text(), await direct.text());
+  }
+  await select('unit', '1');
+  await page.waitForFunction(() => !document.querySelector('#start').disabled);
+  await select('sensor', '7');
+  await query('train', 1, 1, 20);
+  await select('unit', '2');
+  await promptCleared();
+  await select('unit', '1');
+  await page.waitForFunction(() => !document.querySelector('#start').disabled);
+  await query('train', 1, 1, 20);
+  await select('sensor', '8');
+  await promptCleared();
+  await select('sensor', '7');
+  await query('train', 1, 1, 20);
+  await page.locator('#start').fill('2');
+  await promptCleared();
+  await query('train', 1, 1, 20);
+  await page.locator('#end').fill('5');
+  await promptCleared();
+  await page.route(routePattern, async route => {
+    const response = await route.fetch();
+    const body = await response.json();
+    delete body.data.points[0].source_record_index;
+    await route.fulfill({ response, json: body });
+  });
+  await page.locator('#run').click();
+  await page.getByText('This History response does not qualify for a prompt.').waitFor();
+  await promptCleared();
+  await page.unroute(routePattern);
+  recap('M4 static and proxy routes, selection invalidation, invalid provenance and actual clipboard readback');
   if (process.env.FD001_NEGATIVE_ORIGIN) {
     const isolated = await browser.newPage();
     const health = isolated.waitForResponse(r => r.url().endsWith('/api/health'));
@@ -182,6 +280,8 @@ try {
     await isolated.locator('#status[data-state="error"]').waitFor();
     assert.match(await isolated.locator('#status').textContent(), /SOURCE_NOT_VERIFIED/);
     assert.equal(await isolated.locator('#results').isHidden(), true);
+    assert.equal(await isolated.locator('#generate-prompt').isDisabled(), true);
+    assert.equal(await isolated.locator('#copy-prompt').isDisabled(), true);
     await isolated.close();
     recap('Real HTTP 503 retained by the proxy and shown in the browser');
   }

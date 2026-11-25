@@ -7,6 +7,7 @@ const routes = new Set(['/api/health', '/api/catalog', '/api/units', '/api/histo
 const assets = new Map([
   ['/', ['index.html', 'text/html']], ['/style.css', ['style.css', 'text/css']],
   ['/app.mjs', ['app.mjs', 'text/javascript']], ['/model.mjs', ['model.mjs', 'text/javascript']],
+  ['/prompt.mjs', ['prompt.mjs', 'text/javascript']],
 ]);
 const send = (res, status, type, body) => res.writeHead(status, {
   'Content-Type': type, 'Cache-Control': 'no-store', 'X-Content-Type-Options': 'nosniff',

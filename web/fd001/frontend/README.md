@@ -14,6 +14,16 @@ After the Cycle range is confirmed, enter the inclusive range and select
 **Query history**. Expand **Source records** for the accessible point table
 and original locators. Stop each server with Ctrl+C.
 
+## Evidence prompt
+
+After a verified History query, select **Generate evidence prompt** to preview
+the observed values, source locators, statistics and analysis instructions.
+**Copy prompt** uses the browser clipboard on localhost. If clipboard access
+is rejected, the preview remains available for manual selection. The browser
+clears the preview when a selection changes or a query starts. Clipboard
+writes are explicit user actions. The app keeps the preview in memory and
+sends no prompt to an external service.
+
 The browser uses same-origin GET requests for Health, Catalog, Units and
 History. The Node server binds to IPv4 loopback and forwards only those four
 paths to the Flask loopback server. It preserves upstream status and body and
@@ -44,6 +54,7 @@ N/A for both. Missing or non-finite measurement values are rejected.
 
 ```powershell
 node --test web/fd001/frontend_tests/model.test.mjs
+node --test web/fd001/frontend_tests/prompt.test.mjs
 npm.cmd install --prefix web/fd001/frontend_tests/local_only --no-audit --no-fund playwright-core@1.65.1
 node web/fd001/frontend_tests/browser.mjs
 python -B web/fd001/tests/test_api.py
@@ -53,3 +64,10 @@ Keep both default-port servers running for the browser command. The browser
 suite uses the installed Microsoft Edge channel. Comparison details are
 written under `frontend_tests/local_only/`. The public screenshot is taken
 before selecting a dataset or querying any telemetry.
+
+For the real missing-source test, start a second Backend on port 8767 with
+`--source-dir` pointing to an empty test directory and a second frontend with
+`FD001_BACKEND_PORT=8767` and `FD001_FRONTEND_PORT=8768`. Set
+`FD001_NEGATIVE_ORIGIN=http://127.0.0.1:8768` in the Browser UAT terminal.
+The browser grants clipboard read and write permission for the default
+loopback origin. Windows clipboard readback may encode lines as CRLF.

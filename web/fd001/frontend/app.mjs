@@ -1,4 +1,5 @@
 import { api, ApiError, chartPoints, format, latestRequest, statistics } from './model.mjs';
+import { evidencePrompt } from './prompt.mjs';
 
 const $ = id => document.getElementById(id);
 const split = $('split'), unit = $('unit'), sensor = $('sensor');
@@ -6,6 +7,44 @@ const start = $('start'), end = $('end'), run = $('run');
 const units = latestRequest(), bounds = latestRequest(), history = latestRequest();
 const sensors = new Map();
 let range, plotted = [];
+let currentHistory;
+const preview = $('prompt-preview'), generate = $('generate-prompt'), copy = $('copy-prompt');
+const promptStatus = $('prompt-status');
+
+function selection() {
+  return { split: split.value, unit_id: Number(unit.value), sensor_id: Number(sensor.value),
+    cycle_start: start.valueAsNumber, cycle_end: end.valueAsNumber };
+}
+
+generate.addEventListener('click', () => {
+  preview.value = '';
+  copy.disabled = true;
+  try {
+    preview.value = evidencePrompt(currentHistory, selection());
+    copy.disabled = false;
+    promptStatus.textContent = 'Evidence prompt ready.';
+  } catch (error) {
+    promptStatus.textContent = 'Cannot generate prompt. ' + error.message;
+  }
+});
+
+copy.addEventListener('click', async () => {
+  const response = currentHistory;
+  const text = preview.value;
+  if (!response || !text) return;
+  copy.disabled = true;
+  try {
+    if (evidencePrompt(response, selection()) !== text) throw new Error('Selection changed.');
+    await navigator.clipboard.writeText(text);
+    if (currentHistory === response && preview.value === text) promptStatus.textContent = 'Copied to clipboard.';
+  } catch {
+    if (currentHistory === response && preview.value === text) {
+      promptStatus.textContent = 'Copy failed. Check clipboard permissions.';
+    }
+  } finally {
+    if (currentHistory === response && preview.value === text) copy.disabled = false;
+  }
+});
 
 function state(kind, message) {
   $('status').dataset.state = kind;
@@ -24,6 +63,10 @@ function options(select, label, entries) {
 
 function clear() {
   history.cancel();
+  currentHistory = undefined;
+  preview.value = '';
+  generate.disabled = copy.disabled = true;
+  promptStatus.textContent = 'Query verified history to enable prompt generation.';
   plotted = [];
   $('results').hidden = true;
   $('records').open = false;
@@ -132,7 +175,8 @@ function descriptions(id, fields) {
   }));
 }
 
-function render({ data, provenance }) {
+function render(response) {
+  const { data, provenance } = response;
   const pairs = chartPoints(data.points);
   if (data.observation_count !== pairs.length) throw new ApiError('INVALID_RESPONSE', 'Observation count differs from History points.');
   if (!pairs.length) return state('empty', 'No observations in the returned range.');
@@ -164,6 +208,14 @@ function render({ data, provenance }) {
   plotted = pairs;
   $('results').hidden = false;
   draw();
+  try {
+    evidencePrompt(response, selection());
+    currentHistory = response;
+    generate.disabled = false;
+    promptStatus.textContent = 'Current verified history is available.';
+  } catch {
+    promptStatus.textContent = 'This History response does not qualify for a prompt.';
+  }
   state('success', pairs.length + ' observations returned.');
 }
 

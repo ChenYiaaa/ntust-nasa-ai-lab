@@ -34,6 +34,16 @@
         </table></div></details>
       </section>
     </div>
+    <section class="panel" aria-labelledby="prompt-heading">
+      <h2 id="prompt-heading">Evidence prompt</h2>
+      <div class="prompt-actions">
+        <button type="button" id="generate-prompt" disabled>Generate evidence prompt</button>
+        <button type="button" id="copy-prompt" disabled>Copy prompt</button>
+      </div>
+      <p id="prompt-status" role="status">Query verified history to enable prompt generation.</p>
+      <label for="prompt-preview">Prompt preview</label>
+      <textarea id="prompt-preview" rows="8" readonly></textarea>
+    </section>
   </main>
 </body>
 </html>
