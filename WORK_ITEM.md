@@ -232,9 +232,17 @@ STUDENT-MAIN Brain 已對 `WO-M3-002` 核發 `PASS`，受驗 Commit 為 `d5216cf
 | TO | STUDENT-WEB Brain |
 | OWNER_APPROVAL | `GRANTED` |
 | MAIN_AUTHORIZATION | `GRANTED` |
-| STATUS | `COMMAND_DISPATCHED_TO_WEB_BRAIN` |
-| WEB_OWN_WORKER | `NOT_DISPATCHED` |
-| WEB_WORKER_RELEASE | `PENDING_MAIN_ACCEPTANCE_OF_WO-M4-001` |
+| STATUS | `PASS` |
+| WEB_DECISION | `PASS` |
+| MAIN_DECISION | `PASS` |
+| WEB_WORK_ITEM | `WO-M4-WEB-001` |
+| SCOPE_EXTENSION | `WO-M4-WEB-001-SCOPE-EXT-01` |
+| ACCEPTED_COMMIT | `42a36bb73793a691c8d6a463ab6b697de4f7e468` |
+| PROMPT_GENERATOR | `PASS` |
+| PROMPT_COPY | `PASS_BY_REVIEWED_EVIDENCE` |
+| SOURCE_TRACEABILITY | `PASS` |
+| BROWSER_UAT | `PASS_BY_REVIEWED_WORKER_EVIDENCE` |
+| WEB_OWN_WORKER | `COMPLETED_AND_STOPPED` |
 | ACCEPTANCE_OWNER | STUDENT-MAIN Brain |
 
 - **OBJECTIVE** — 以 M3 已驗收的網站及 FD001 API 為基礎，交付可啟動的互動式網站，支援真實資料查詢、Sensor Trend、原始來源定位，以及 Evidence Prompt 生成與複製。
@@ -253,9 +261,51 @@ STUDENT-MAIN Brain 已對 `WO-M3-002` 核發 `PASS`，受驗 Commit 為 `d5216cf
 
 ### WEB_WORKER_RELEASE
 
-STUDENT-MAIN Brain 須從 GitHub 遠端獨立驗收 `WO-M4-001` 為 `PASS`。之後由 STUDENT-WEB Brain 重新核對最新治理文件，並正式派遣自己的 Web Own Worker。
+M4 的派工前置條件為 STUDENT-MAIN Brain 遠端獨立驗收 `WO-M4-001`，再由 STUDENT-WEB Brain 核對最新治理文件並派工。Web Own Worker 已完成交付並停止。
 
-M5 維持 `NOT_STARTED`、`OWNER_APPROVAL: NOT_GRANTED`、`AUTHORIZATION: NOT_AUTHORIZED` 及 `DISPATCH: NOT_AUTHORIZED`。
+### M4_ACCEPTANCE_EVIDENCE
+
+STUDENT-WEB Brain 與 STUDENT-MAIN Brain 均對 `WO-M4-WEB-001` 核發 `PASS`。受驗結果可查閱 [PUBLIC_SAFE](outputs/M4_FD001_INTERACTIVE_EVIDENCE_WEB_V1/PUBLIC_SAFE/)、[執行記錄](outputs/M4_FD001_INTERACTIVE_EVIDENCE_WEB_V1/PUBLIC_SAFE/execution.md)、[比對證據](outputs/M4_FD001_INTERACTIVE_EVIDENCE_WEB_V1/PUBLIC_SAFE/verification.md)與 [Browser UAT](outputs/M4_FD001_INTERACTIVE_EVIDENCE_WEB_V1/PUBLIC_SAFE/browser-uat.md)。
+
+| 檢查 | Worker 執行證據 |
+| --- | --- |
+| BACKEND | `WORKER_REPORTED_20_OF_20` |
+| M3_MODEL | `WORKER_REPORTED_4_OF_4` |
+| M4_PROMPT | `WORKER_REPORTED_4_OF_4` |
+| TRAIN_PARITY | `WORKER_REPORTED_20_OF_20` |
+| TEST_PARITY | `WORKER_REPORTED_3_OF_3` |
+| FINAL_BROWSER_EXIT | `WORKER_REPORTED_0` |
+
+#### STARTUP
+
+在專案根目錄的兩個終端機分別啟動。
+
+- **Backend** — `python -B web/fd001/backend/api.py --port 8765`
+- **Frontend** — `node web/fd001/frontend/serve.mjs`
+- **LOCAL_URL** — `http://127.0.0.1:8766/`
+
+### M4_ACCEPTANCE_LIMITATIONS
+
+- MAIN Brain 未親自重跑私人 TXT。
+- MAIN Brain 未親自操作學生 Windows 環境中的 Edge。
+- Browser PASS 依據為 Worker 執行證據。
+- Browser Coverage 限 Windows Edge。
+- Clipboard 需要瀏覽器權限。
+- 本地原始資料變更後須重啟服務以重新驗證。
+
+### M4_FOLLOW_UP
+
+`README_STATIC_ASSET_COUNT_STALE` 為非阻塞問題，列為後續維護候選事項。
+
+### M5_RELEASE_CONDITION
+
+M5 維持 `NOT_STARTED`、`OWNER_APPROVAL: NOT_GRANTED`、`AUTHORIZATION: NOT_AUTHORIZED` 及 `DISPATCH: NOT_AUTHORIZED`。階段轉換須依序完成以下事項。
+
+1. 將 `WO-M4-002` Commit 並 Push 至 GitHub `main`。
+2. STUDENT-MAIN Brain 獨立驗收 `WO-M4-002` 並核發 `PASS`。
+3. STUDENT 正式批准 M5。
+4. STUDENT-MAIN Brain 核對 GitHub `main` 最新治理文件。
+5. STUDENT-MAIN Brain 建立 M5 限定工作單。
 
 ## 後續工作單必填欄位
 

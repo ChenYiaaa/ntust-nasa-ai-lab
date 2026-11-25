@@ -96,13 +96,22 @@
 ## M4 — EVIDENCE PROMPT GENERATION
 
 - **MILESTONE** — `M4_EVIDENCE_PROMPT_GENERATION`。
-- **Status** — `AUTHORIZED_NOT_STARTED`。
+- **Status** — `PASS`。
 - **OWNER_APPROVAL** — `GRANTED`。
 - **MAIN_AUTHORIZATION** — `GRANTED`。
 - **ASSIGNED_BRAIN** — STUDENT-WEB Brain。
 - **BRAIN_TO_BRAIN_WORK_ITEM** — `M4_FD001_INTERACTIVE_EVIDENCE_WEB_V1`。
-- **WEB_WORKER_STATUS** — `NOT_DISPATCHED`。
-- **WEB_WORKER_RELEASE** — `PENDING_MAIN_ACCEPTANCE_OF_WO-M4-001`。
+- **WEB_DECISION / MAIN_DECISION** — `PASS` / `PASS`。
+- **WEB_WORK_ITEM** — `WO-M4-WEB-001`。
+- **SCOPE_EXTENSION** — `WO-M4-WEB-001-SCOPE-EXT-01`。
+- **ACCEPTED_COMMIT** — `42a36bb73793a691c8d6a463ab6b697de4f7e468`。
+- **WEB_WORKER_STATUS** — `COMPLETED_AND_STOPPED`。
+- **PROMPT_GENERATOR / SOURCE_TRACEABILITY** — `PASS` / `PASS`。
+- **PROMPT_COPY** — `PASS_BY_REVIEWED_EVIDENCE`。
+- **BROWSER_UAT** — `PASS_BY_REVIEWED_WORKER_EVIDENCE`。
+- **EVIDENCE** — [M4 公開證據](outputs/M4_FD001_INTERACTIVE_EVIDENCE_WEB_V1/PUBLIC_SAFE/)與[測試及啟動紀錄](WORK_ITEM.md#m4_acceptance_evidence)。
+- **ACCEPTANCE_LIMITATIONS** — MAIN Brain 未親自重跑私人 TXT 或操作學生的 Edge。Browser PASS 依據為 Worker 執行證據，瀏覽器覆蓋限 Windows Edge。剪貼簿需要瀏覽器權限，原始資料變更後須重啟服務以重新驗證。
+- **維護候選事項** — `README_STATIC_ASSET_COUNT_STALE` 為非阻塞問題。
 - **Goal** — 根據網站選取條件與真實資料產生可複製、可追溯的 Evidence Prompt。
 - **Input** — M3 已驗收的選取與查詢介面、M2 的來源資訊及授權的 Prompt 格式。
 - **Deliverables** — Evidence Prompt 產生與複製功能、輸出範例及原始資料比對證據。
@@ -110,7 +119,7 @@
 - **互動式網站** — 沿用 M3 已驗收的網站與 FD001 API，整合 Train／Test、Engine Unit、Sensor 與 Cycle 範圍選取，顯示真實 Sensor Trend 及對應 Source Records。保留 M3 已驗收成果與 FD001 Data Contract `1.0.0`。
 - **Acceptance Criteria** — 使用目前選取產生可複製的 Evidence Prompt，引用的讀值與統計須可重現並追溯至來源。交付可依命令啟動的網站及實際 Local URL，以真實瀏覽器或人工 UAT 核對畫面、API 與原始 TXT，並驗證錯誤與空結果。靜態截圖可作佐證，交付須包含可操作網站與 UAT 執行證據。
 - **STOP_IF** — `WO-M4-001` 尚未獲 MAIN Brain 驗收、Prompt 與網站選取或原始讀值不一致、來源缺漏，或輸出含未授權資訊。
-- **Next Role** — STUDENT-MAIN Brain 驗收並取得 STUDENT 核准後，派發 M5。
+- **Next Role** — 等待 STUDENT-MAIN Brain 遠端獨立驗收 `WO-M4-002`。通過後由 STUDENT 決定是否授權 M5，完整條件見 [WORK_ITEM.md](WORK_ITEM.md#m5_release_condition)。
 
 ## M5 — END-TO-END VALIDATION AND DELIVERY
 
