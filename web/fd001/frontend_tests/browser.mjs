@@ -5,7 +5,7 @@ import { chromium } from './local_only/node_modules/playwright-core/index.mjs';
 
 const origin = 'http://127.0.0.1:8766';
 const privateDir = new URL('./local_only/', import.meta.url);
-const screenshot = new URL('../../../outputs/M4_FD001_INTERACTIVE_EVIDENCE_WEB_V1/PUBLIC_SAFE/browser-initial.png', import.meta.url);
+const screenshot = new URL('../../../outputs/M5_FD001_EVIDENCE_PROMPT_HARDENING_V1/PUBLIC_SAFE/browser-initial.png', import.meta.url);
 await mkdir(new URL('.', screenshot), { recursive: true });
 const browser = await chromium.launch({ channel: 'msedge', headless: true });
 const page = await browser.newPage({ viewport: { width: 1240, height: 900 } });
@@ -19,6 +19,18 @@ const recap = label => console.log('OK', label);
 const generate = page.locator('#generate-prompt');
 const copy = page.locator('#copy-prompt');
 const preview = page.locator('#prompt-preview');
+let catalog;
+const headings = [
+  'SECTION A: DATASET & SELECTION',
+  'SECTION B: SOURCE PROVENANCE',
+  'SECTION C: COLUMN SEMANTICS',
+  'SECTION D: OBSERVED DATA',
+  'SECTION E: DATA QUALITY',
+  'SECTION F: KNOWN FACTS',
+  'SECTION G: INFERRED FINDINGS',
+  'SECTION H: UNKNOWN / NOT ESTABLISHED',
+  'SECTION I: INSTRUCTIONS TO EXTERNAL AI',
+];
 
 async function promptCleared() {
   assert.equal(await generate.isDisabled(), true);
@@ -31,20 +43,38 @@ async function checkPrompt(actual, expected, points) {
   await generate.click();
   const text = await preview.inputValue();
   const { data, provenance } = actual;
+  const lines = text.split('\n');
+  assert.deepEqual(lines.filter(line => line.startsWith('SECTION ')), headings);
+  const sections = text.split(/^SECTION [A-I]: .+$/m).slice(1).map(section => section.trim().split('\n'));
+  const sensorMetadata = catalog.find(sensor => sensor.sensor_id === data.sensor_id);
+  assert.ok(sensorMetadata);
+  for (const key of ['sensor_id', 'column_name', 'column_position', 'semantic_role', 'dtype',
+    'source_field', 'unit_of_measure_if_known', 'nullable']) {
+    assert.ok(sections[2].includes(key + ': ' + sensorMetadata[key]), key);
+  }
+  assert.equal(sensorMetadata.column_name, provenance.column_name);
+  assert.equal(sensorMetadata.column_position, provenance.column_position);
+  assert.ok(sections[4].includes('Evidence class: CALCULATED'));
+  assert.ok(sections[5].includes('Evidence class: OBSERVED'));
+  assert.ok(sections[6].includes('No additional inference established from the available evidence.'));
+  assert.deepEqual(sections[7].slice(1, 8), ['Fault Status: NOT ESTABLISHED', 'Fault Type: NOT ESTABLISHED',
+    'Fault Cause: NOT ESTABLISHED', 'RUL: NOT ESTIMATED', 'Health Score: NOT ESTABLISHED',
+    'Physical Sensor Unit: UNKNOWN', 'Physical Sensor Meaning: UNKNOWN']);
+  assert.equal(sections[8].filter(line => /^\d+\./.test(line)).length, 10);
   for (const [name, value] of Object.entries({
-    'Dataset ID': data.dataset_id, 'Contract version': provenance.contract_version, Split: data.split,
+    'Dataset ID': data.dataset_id, 'Data Contract Version': provenance.contract_version, Split: data.split,
     'Engine Unit ID': data.unit_id, 'Sensor ID': data.sensor_id, 'Cycle Start': data.cycle_start,
-    'Cycle End': data.cycle_end, 'Observation count': points.length,
-    'Source filename': provenance.sources[0].source_filename,
+    'Cycle End': data.cycle_end, 'Observation Count': points.length,
+    'Source Filename': provenance.sources[0].source_filename,
     'Source SHA256': provenance.sources[0].source_sha256,
-    'Source verification status': 'VERIFIED_LOCAL_SOURCE',
+    'Verification Status': 'VERIFIED_LOCAL_SOURCE',
   })) assert.ok(text.split('\n').includes(name + ': ' + value), name);
   assert.deepEqual(text.split('\n').filter(line => /^\d+ \|/.test(line))
     .map(line => line.split(' | ').map(Number)), points.map(p =>
       [p.cycle, p.value, p.source_record_index, p.source_physical_line, p.column_position]));
-  const labels = ['Count', 'Minimum', 'Maximum', 'Mean', 'Sample standard deviation', 'OLS trend slope', 'Missing count'];
+  const labels = ['Observation Count', 'Minimum', 'Maximum', 'Mean', 'Sample standard deviation', 'OLS trend slope', 'Missing count'];
   expected.forEach((value, i) => {
-    const field = text.split('\n').find(line => line.startsWith(labels[i] + ': '));
+    const field = sections[4].find(line => line.startsWith(labels[i] + ': '));
     assert.ok(field, 'Prompt statistic missing: ' + labels[i]);
     const rendered = field.slice(labels[i].length + 2);
     if (value === null) assert.equal(rendered, 'N/A');
@@ -134,7 +164,11 @@ try {
     };
   });
   const moduleRequest = page.waitForResponse(r => r.url() === origin + '/prompt.mjs');
+  const catalogRequest = page.waitForResponse(r => r.url() === origin + '/api/catalog');
   await page.goto(origin);
+  const catalogResponse = await catalogRequest;
+  assert.equal(catalogResponse.status(), 200);
+  catalog = (await catalogResponse.json()).data.sensor_catalog;
   const moduleResponse = await moduleRequest;
   assert.equal(moduleResponse.status(), 200);
   assert.equal(moduleResponse.headers()['content-type'], 'text/javascript; charset=utf-8');
@@ -272,6 +306,22 @@ try {
   await promptCleared();
   await page.unroute(routePattern);
   recap('M4 static and proxy routes, selection invalidation, invalid provenance and actual clipboard readback');
+  await page.route('**/api/catalog', async route => {
+    const response = await route.fetch();
+    const body = await response.json();
+    body.data.sensor_catalog.find(sensor => sensor.sensor_id === 7).source_field = 13;
+    await route.fulfill({ response, json: body });
+  });
+  await page.reload();
+  await visibleState('initial');
+  await choose('train', '1');
+  await page.locator('#end').fill('5');
+  await page.locator('#run').click();
+  await visibleState('success');
+  await page.getByText('This History response does not qualify for a prompt.').waitFor();
+  await promptCleared();
+  await page.unroute('**/api/catalog');
+  recap('M5 nine sections, Catalog metadata parity and rejection of an inconsistent definition');
   if (process.env.FD001_NEGATIVE_ORIGIN) {
     const isolated = await browser.newPage();
     const health = isolated.waitForResponse(r => r.url().endsWith('/api/health'));

@@ -24,10 +24,18 @@ clears the preview when a selection changes or a query starts. Clipboard
 writes are explicit user actions. The app keeps the preview in memory and
 sends no prompt to an external service.
 
+The preview contains nine ordered sections, from Dataset & Selection to
+Instructions to External AI. The generator validates the selected entry
+from the already-loaded Catalog against History provenance. An absent or
+inconsistent definition disables generation. Observed readings are separate
+from derived statistics, inferred findings and unknowns. The current contract
+reports the sensor unit as UNKNOWN and supplies no physical interpretation.
+The prompt states when fault, RUL and Health Score have not been established.
+
 The browser uses same-origin GET requests for Health, Catalog, Units and
 History. The Node server binds to IPv4 loopback and forwards only those four
 paths to the Flask loopback server. It preserves upstream status and body and
-sends a no-store cache policy. The static allowlist contains only four frontend
+sends a no-store cache policy. The static allowlist contains only five frontend
 assets. The frontend takes observed bounds from the documented
 `CYCLE_OUT_OF_RANGE` response for a deliberately reversed probe (1–0) using
 the selected split and Unit. A genuine query validates those bounds again in

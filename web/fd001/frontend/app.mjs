@@ -16,11 +16,16 @@ function selection() {
     cycle_start: start.valueAsNumber, cycle_end: end.valueAsNumber };
 }
 
+function promptFor(response) {
+  const current = selection();
+  return evidencePrompt(response, current, sensors.get(current.sensor_id));
+}
+
 generate.addEventListener('click', () => {
   preview.value = '';
   copy.disabled = true;
   try {
-    preview.value = evidencePrompt(currentHistory, selection());
+    preview.value = promptFor(currentHistory);
     copy.disabled = false;
     promptStatus.textContent = 'Evidence prompt ready.';
   } catch (error) {
@@ -34,7 +39,7 @@ copy.addEventListener('click', async () => {
   if (!response || !text) return;
   copy.disabled = true;
   try {
-    if (evidencePrompt(response, selection()) !== text) throw new Error('Selection changed.');
+    if (promptFor(response) !== text) throw new Error('Selection changed.');
     await navigator.clipboard.writeText(text);
     if (currentHistory === response && preview.value === text) promptStatus.textContent = 'Copied to clipboard.';
   } catch {
@@ -184,7 +189,7 @@ function render(response) {
   const rangeText = (a, b) => a + '–' + b;
   const metadata = sensors.get(data.sensor_id);
   $('selection').textContent = data.split + ' / Unit ' + data.unit_id + ' / Sensor ' + data.sensor_id +
-    ' · Physical unit ' + metadata.unit_of_measure_if_known;
+    ' · Physical unit ' + (metadata?.unit_of_measure_if_known ?? 'Unavailable');
   descriptions('stats', [
     ['Observation count', stats.count], ['Minimum', stats.min], ['Maximum', stats.max],
     ['Mean', stats.mean], ['Sample standard deviation', stats.deviation], ['OLS trend slope', stats.slope],
@@ -209,7 +214,7 @@ function render(response) {
   $('results').hidden = false;
   draw();
   try {
-    evidencePrompt(response, selection());
+    promptFor(response);
     currentHistory = response;
     generate.disabled = false;
     promptStatus.textContent = 'Current verified history is available.';
