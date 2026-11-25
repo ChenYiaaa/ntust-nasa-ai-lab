@@ -299,13 +299,73 @@ STUDENT-WEB Brain 與 STUDENT-MAIN Brain 均對 `WO-M4-WEB-001` 核發 `PASS`。
 
 ### M5_RELEASE_CONDITION
 
-M5 維持 `NOT_STARTED`、`OWNER_APPROVAL: NOT_GRANTED`、`AUTHORIZATION: NOT_AUTHORIZED` 及 `DISPATCH: NOT_AUTHORIZED`。階段轉換須依序完成以下事項。
+M5 階段轉換前置條件如下。
 
 1. 將 `WO-M4-002` Commit 並 Push 至 GitHub `main`。
 2. STUDENT-MAIN Brain 獨立驗收 `WO-M4-002` 並核發 `PASS`。
 3. STUDENT 正式批准 M5。
 4. STUDENT-MAIN Brain 核對 GitHub `main` 最新治理文件。
 5. STUDENT-MAIN Brain 建立 M5 限定工作單。
+
+STUDENT-MAIN Brain 已正式驗收 `WO-M4-002` 為 `PASS`，受驗 Commit 為 `3f048f092aed02597ff132622db0a6a76b0e1aa8`。STUDENT 已正式授權 M5。Web Own Worker 的派工解除條件見 M5 Web 子工作。
+
+## M5_END_TO_END_VALIDATION_AND_DELIVERY
+
+| 欄位 | 值 |
+| --- | --- |
+| WORK_ITEM_ID | `M5_END_TO_END_VALIDATION_AND_DELIVERY` |
+| STATUS | `AUTHORIZED_NOT_STARTED` |
+| OWNER_APPROVAL | `GRANTED` |
+| MAIN_AUTHORIZATION | `GRANTED` |
+| MAIN_ACCEPTANCE_OWNER | STUDENT-MAIN Brain |
+| WEB_SUBTASK | `M5_FD001_EVIDENCE_PROMPT_HARDENING_V1` |
+| WEB_BRAIN_STATUS | `COMMAND_DISPATCHED_FOR_PLANNING` |
+| WEB_WORKER_STATUS | `NOT_DISPATCHED` |
+| WEB_WORKER_RELEASE | `PENDING_MAIN_ACCEPTANCE_OF_WO-M5-001` |
+
+- **OBJECTIVE** — 完成最終 End-to-End Validation、既有 Evidence Prompt 強化、互動式網站驗證，以及可重現的最終交付。
+- **INPUT** — M0–M4 驗收紀錄、GitHub `main`、FD001 Data Contract `1.0.0`、M3 已驗收 API、M4 已驗收網站與 Prompt，以及學生工作區已驗證的原始資料。
+- **EXPECTED_OUTPUT** — Web 子工作驗收證據、Raw／API／UI／Prompt 比對、Browser UAT、啟動命令及已驗證的 Local URL、固定的交付 Commit、完整端到端重現步驟及最終驗收紀錄。
+- **ACCEPTANCE** — Web 子工作須完成並經 STUDENT-MAIN Brain 接受，之後才可啟動 MAIN Final E2E Work Item。最終端到端驗收、重現性查核與交付由 STUDENT-MAIN Brain 負責。
+- **STOP_IF** — 治理前置條件未滿足、端到端流程無法重現、證據與來源不一致，或需要未取得的授權。
+- **RETURN_TO** — STUDENT-MAIN Brain 彙整最終結果並交付 STUDENT。
+
+## M5_FD001_EVIDENCE_PROMPT_HARDENING_V1
+
+| 欄位 | 值 |
+| --- | --- |
+| WORK_ITEM_ID | `M5_FD001_EVIDENCE_PROMPT_HARDENING_V1` |
+| PARENT_WORK_ITEM | `M5_END_TO_END_VALIDATION_AND_DELIVERY` |
+| ASSIGNEE | STUDENT-WEB Brain |
+| OWNER_APPROVAL | `GRANTED` |
+| MAIN_AUTHORIZATION | `GRANTED` |
+| WEB_BRAIN_STATUS | `COMMAND_DISPATCHED_FOR_PLANNING` |
+| WEB_WORKER_STATUS | `NOT_DISPATCHED` |
+| WEB_WORKER_RELEASE | `PENDING_MAIN_ACCEPTANCE_OF_WO-M5-001` |
+
+- **OBJECTIVE** — STUDENT-WEB Brain 管理其 Web Own Worker，負責強化既有 Evidence Prompt、整合互動式網站及驗證 Browser UAT。
+- **INPUT** — FD001 Data Contract `1.0.0`、M3 已驗收 API、M4 已驗收 Prompt Generator、互動式網站及學生工作區已驗證的 FD001 原始資料。
+- **EXPECTED_OUTPUT** — 強化後的 Evidence Prompt、互動整合證據、複製與剪貼簿讀回證據、Raw／API／UI／Prompt 一致性驗證，以及可重現的啟動命令與已驗證的 Local URL。
+- **RETURN_TO** — STUDENT-MAIN Brain。
+
+### M5_PROMPT_EVIDENCE_RULES
+
+- **KNOWN** — 直接依 Data Contract 與 API 驗證的事實。保留 FD001 來源追溯、原始紀錄及實體行位置、已定義的 Sensor 欄位語意、選取樣本範圍與實際觀測值。
+- **INFERRED** — 經明確定義的計算結果或有限的資料解釋。資料品質摘要中的推導統計須記錄所用資料範圍、計算方法與限制。
+- **UNKNOWN** — 無法由證據驗證的設備狀態、故障類型、故障原因、實際 RUL 與未定義的感測器物理意義。
+
+Prompt 須明確要求外部 AI 區分推論與觀測事實，並禁止無證據宣稱已發生故障、捏造故障診斷、提供無依據的 RUL 預測或健康分數。
+
+### M5_WEB_ACCEPTANCE
+
+1. 核對 Prompt 與目前選取及樣本範圍一致，Raw／API／UI／Prompt 的資料、來源定位與語意可追溯，資料品質摘要可重現。
+2. 使用真實瀏覽器或人工 UAT 驗證互動式網站、實際複製及剪貼簿讀回。
+3. 提供啟動命令、已驗證的 Local URL、交付 Commit 及完整端到端重現步驟。
+4. 由 STUDENT-WEB Brain 先驗收並回報 STUDENT-MAIN Brain。MAIN Brain 接受 Web 子工作後，才可啟動 MAIN Final E2E Work Item。
+
+### M5_WEB_WORKER_RELEASE
+
+STUDENT-WEB Brain 可先規劃。派工前須由 STUDENT-MAIN Brain 從 GitHub 獨立驗收 `WO-M5-001` 為 `PASS`，再由 STUDENT-WEB Brain 核對 GitHub 最新治理文件、確認工作範圍並派遣自己的 Web Own Worker。
 
 ## 後續工作單必填欄位
 

@@ -119,18 +119,24 @@
 - **互動式網站** — 沿用 M3 已驗收的網站與 FD001 API，整合 Train／Test、Engine Unit、Sensor 與 Cycle 範圍選取，顯示真實 Sensor Trend 及對應 Source Records。保留 M3 已驗收成果與 FD001 Data Contract `1.0.0`。
 - **Acceptance Criteria** — 使用目前選取產生可複製的 Evidence Prompt，引用的讀值與統計須可重現並追溯至來源。交付可依命令啟動的網站及實際 Local URL，以真實瀏覽器或人工 UAT 核對畫面、API 與原始 TXT，並驗證錯誤與空結果。靜態截圖可作佐證，交付須包含可操作網站與 UAT 執行證據。
 - **STOP_IF** — `WO-M4-001` 尚未獲 MAIN Brain 驗收、Prompt 與網站選取或原始讀值不一致、來源缺漏，或輸出含未授權資訊。
-- **Next Role** — 等待 STUDENT-MAIN Brain 遠端獨立驗收 `WO-M4-002`。通過後由 STUDENT 決定是否授權 M5，完整條件見 [WORK_ITEM.md](WORK_ITEM.md#m5_release_condition)。
+- **Next Role** — STUDENT-MAIN Brain 已對 `WO-M4-002` 核發 `PASS`，受驗 Commit 為 `3f048f092aed02597ff132622db0a6a76b0e1aa8`。STUDENT 已正式授權 M5，交接條件見 [WORK_ITEM.md](WORK_ITEM.md#m5_release_condition)。
 
 ## M5 — END-TO-END VALIDATION AND DELIVERY
 
-- **Status** — `NOT_STARTED`。
-- **OWNER_APPROVAL** — `NOT_GRANTED`。
-- **AUTHORIZATION** — `NOT_AUTHORIZED`。
-- **DISPATCH** — `NOT_AUTHORIZED`。
+- **MILESTONE** — `M5_END_TO_END_VALIDATION_AND_DELIVERY`。
+- **Status** — `AUTHORIZED_NOT_STARTED`。
+- **OWNER_APPROVAL** — `GRANTED`。
+- **MAIN_AUTHORIZATION** — `GRANTED`。
+- **MAIN_ACCEPTANCE_OWNER** — STUDENT-MAIN Brain。
+- **WEB_SUBTASK** — `M5_FD001_EVIDENCE_PROMPT_HARDENING_V1`。
+- **WEB_ASSIGNEE** — STUDENT-WEB Brain。
+- **WEB_BRAIN_STATUS** — `COMMAND_DISPATCHED_FOR_PLANNING`。
+- **WEB_WORKER_STATUS** — `NOT_DISPATCHED`。
+- **WEB_WORKER_RELEASE** — `PENDING_MAIN_ACCEPTANCE_OF_WO-M5-001`。
 - **Goal** — 完成網站、資料、Evidence Prompt、GitHub 與啟動流程的整體驗收。
 - **Input** — M0 至 M4 的驗收紀錄、GitHub `main`、授權的本地資料及執行環境。
 - **Deliverables** — 啟動與驗證說明、端到端驗收紀錄、可追溯的 GitHub 交付版本及已知問題紀錄。
-- **Responsible Brain** — STUDENT-MAIN Brain。
-- **Acceptance Criteria** — 可從已識別的 GitHub `main` Commit 依說明啟動，並走完載入 FD001、選取 Engine Unit／Cycle／Sensor、核對趨勢及複製 Evidence Prompt 的流程。遠端版本、資料來源及驗收結果可追溯。
-- **STOP_IF** — 無法重現啟動、遠端 Commit 無法驗證、端到端結果不符來源，或交付需要未取得的授權。
-- **Next Role** — STUDENT-MAIN Brain 記錄最終驗收並將成果交給 STUDENT。
+- **Responsible Brain** — STUDENT-WEB Brain 管理其 Web Own Worker，負責既有 Prompt 強化、整合、互動式網站查驗及 Browser UAT。STUDENT-MAIN Brain 保留最終端到端驗收、重現性查核及交付權。
+- **Acceptance Criteria** — Prompt 須與目前網頁選取一致，記錄 FD001 來源追溯、原始紀錄和實體行定位、Sensor 欄位語意、選取樣本範圍、真實觀測值及資料品質摘要。以 `KNOWN`、`INFERRED`、`UNKNOWN` 分別呈現已驗證事實、附方法及限制的推論與未知事項。禁止捏造故障診斷、無依據預測 RUL 或產生無依據的健康分數。以真實瀏覽器或人工 UAT 驗證實際複製及剪貼簿讀回，核對 Raw／API／UI／Prompt 一致性。提供啟動命令、已驗證的 Local URL、固定的 GitHub Commit 及完整端到端重現流程。
+- **STOP_IF** — 治理前置條件未滿足、無法重現啟動、遠端 Commit 無法驗證、端到端結果不符來源，或交付需要未取得的授權。
+- **Next Role** — MAIN Brain 獨立驗收 `WO-M5-001` 後，由 WEB Brain 核對最新治理文件並派工。Web 子工作完成且經 MAIN Brain 接受後，才可啟動 MAIN Final E2E Work Item。最終驗收與交付由 MAIN Brain 負責。
