@@ -162,7 +162,7 @@ STUDENT-WEB Brain 先驗收 Web Own Worker 成果，STUDENT-MAIN Brain 負責 M3
 - FD001 來源或 SHA-256 與 M2 Data Contract 不一致，或 API 回應與原始資料不符。
 - 必須修改未授權檔案或 M2 Data Contract，或必須公開原始 TXT。
 - GitHub Commit 或 Push 失敗。
-- M4 或 M5 工作被提前觸發。兩階段均為 `NOT_AUTHORIZED`。
+- M4 或 M5 工作在各自的授權與派工條件成立前被觸發。
 
 #### WEB_WORKER_RELEASE
 
@@ -220,7 +220,42 @@ STUDENT 已正式授權 M3。Web Own Worker 已完成交付並停止。原派工
 4. STUDENT-MAIN Brain 核對 GitHub `main` 最新治理文件。
 5. STUDENT-MAIN Brain 正式建立 M4 工作單。
 
-上述條件成立前，M4 Worker Dispatch 為 `NOT_AUTHORIZED`。M4 與 M5 都維持 `NOT_STARTED`、`OWNER_APPROVAL: NOT_GRANTED`、`AUTHORIZATION: NOT_AUTHORIZED` 及 `DISPATCH: NOT_AUTHORIZED`。
+STUDENT-MAIN Brain 已對 `WO-M3-002` 核發 `PASS`，受驗 Commit 為 `d5216cfac4a26ea861d654dfc42f56fbb898ddf0`。STUDENT 已正式授權 M4，MAIN Brain 已將工作單派給 STUDENT-WEB Brain。Web Own Worker 派工須符合下方的解除條件。
+
+## M4_FD001_INTERACTIVE_EVIDENCE_WEB_V1
+
+| 欄位 | 值 |
+| --- | --- |
+| WORK_ITEM_ID | `M4_FD001_INTERACTIVE_EVIDENCE_WEB_V1` |
+| TYPE | `BOUNDED_BRAIN_TO_BRAIN_WORK_ORDER` |
+| FROM | STUDENT-MAIN Brain |
+| TO | STUDENT-WEB Brain |
+| OWNER_APPROVAL | `GRANTED` |
+| MAIN_AUTHORIZATION | `GRANTED` |
+| STATUS | `COMMAND_DISPATCHED_TO_WEB_BRAIN` |
+| WEB_OWN_WORKER | `NOT_DISPATCHED` |
+| WEB_WORKER_RELEASE | `PENDING_MAIN_ACCEPTANCE_OF_WO-M4-001` |
+| ACCEPTANCE_OWNER | STUDENT-MAIN Brain |
+
+- **OBJECTIVE** — 以 M3 已驗收的網站及 FD001 API 為基礎，交付可啟動的互動式網站，支援真實資料查詢、Sensor Trend、原始來源定位，以及 Evidence Prompt 生成與複製。
+- **INPUT** — FD001 Data Contract `1.0.0`、M3 受驗 API Commit `c50495ca02814018c8f4c30ae5285c48cf9f2a99`、M3 受驗 Frontend Commit `e133b92786be350eef13dff82f4ad14b90d941f0`、[M3 Browser UAT 證據](outputs/M3_FD001_HEALTH_WEBSITE_MVP_V1/frontend/PUBLIC_SAFE/browser-uat.md)，以及學生工作區的已驗證本地 FD001 來源。
+- **EXPECTED_OUTPUT** — 可啟動的網站、Train／Test 選取、Unit 選單、Sensor 選單、Cycle 範圍選取、Sensor Trend Chart、Source Record Table、Source Provenance、Evidence Prompt Generator、Copy Prompt、啟動命令、實際 Local URL、真實 Browser 或人工 UAT、畫面與 API 及原始列的比對證據，以及 GitHub Commit 證據。
+- **RETURN_TO** — STUDENT-MAIN Brain。
+
+### M4_ACCEPTANCE
+
+1. 依交付的啟動命令啟動網站，並在本地瀏覽器開啟交付的 Local URL。
+2. 核對 Train／Test、Unit、Sensor 與 Cycle 範圍的選取與 API 一致。
+3. 逐筆核對畫面趨勢、來源資料列、API 回應與原始 TXT，確認來源定位可追溯。
+4. 依目前選取生成 Evidence Prompt，確認引用數值可重現，並實際驗證複製功能。
+5. 驗證錯誤及空資料處理，提供真實瀏覽器或人工 UAT 的執行證據。靜態截圖可作佐證。
+6. 確認 GitHub 變更符合授權範圍，公開交付排除未授權的原始 TXT，並保留 M3 已驗收成果與 FD001 Data Contract 定義。
+
+### WEB_WORKER_RELEASE
+
+STUDENT-MAIN Brain 須從 GitHub 遠端獨立驗收 `WO-M4-001` 為 `PASS`。之後由 STUDENT-WEB Brain 重新核對最新治理文件，並正式派遣自己的 Web Own Worker。
+
+M5 維持 `NOT_STARTED`、`OWNER_APPROVAL: NOT_GRANTED`、`AUTHORIZATION: NOT_AUTHORIZED` 及 `DISPATCH: NOT_AUTHORIZED`。
 
 ## 後續工作單必填欄位
 

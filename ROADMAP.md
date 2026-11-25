@@ -75,7 +75,7 @@
 - **AMENDMENT_ID** — `M3_FD001_READONLY_API_REQUIREMENTS_V1`。
 - **REQUIRED_ENDPOINTS** — `GET /api/health`、`GET /api/catalog`、`GET /api/units`、`GET /api/history`。
 - **MANDATORY_TEST_QUERY** — `/api/history?split=train&unit=1&sensor=7&start=1&end=20`。
-- **Next Role** — 等待 STUDENT-MAIN Brain 從 GitHub 遠端獨立驗收 `WO-M3-002`。通過後由 STUDENT 決定是否授權 M4。
+- **Next Role** — STUDENT-MAIN Brain 已獨立驗收 `WO-M3-002` 為 `PASS`，受驗 Commit 為 `d5216cfac4a26ea861d654dfc42f56fbb898ddf0`。STUDENT 已正式授權 M4，Web Own Worker 的派工依 M4 的解除條件辦理。
 
 ### M3_ACCEPTANCE_SUMMARY
 
@@ -95,16 +95,21 @@
 
 ## M4 — EVIDENCE PROMPT GENERATION
 
-- **Status** — `NOT_STARTED`。
-- **OWNER_APPROVAL** — `NOT_GRANTED`。
-- **AUTHORIZATION** — `NOT_AUTHORIZED`。
-- **DISPATCH** — `NOT_AUTHORIZED`。
+- **MILESTONE** — `M4_EVIDENCE_PROMPT_GENERATION`。
+- **Status** — `AUTHORIZED_NOT_STARTED`。
+- **OWNER_APPROVAL** — `GRANTED`。
+- **MAIN_AUTHORIZATION** — `GRANTED`。
+- **ASSIGNED_BRAIN** — STUDENT-WEB Brain。
+- **BRAIN_TO_BRAIN_WORK_ITEM** — `M4_FD001_INTERACTIVE_EVIDENCE_WEB_V1`。
+- **WEB_WORKER_STATUS** — `NOT_DISPATCHED`。
+- **WEB_WORKER_RELEASE** — `PENDING_MAIN_ACCEPTANCE_OF_WO-M4-001`。
 - **Goal** — 根據網站選取條件與真實資料產生可複製、可追溯的 Evidence Prompt。
 - **Input** — M3 已驗收的選取與查詢介面、M2 的來源資訊及授權的 Prompt 格式。
 - **Deliverables** — Evidence Prompt 產生與複製功能、輸出範例及原始資料比對證據。
-- **Responsible Brain** — STUDENT-MAIN Brain。
-- **Acceptance Criteria** — Prompt 可複製，能追溯到選定的 Engine Unit、Cycle、Sensor 與資料來源，所引用的讀值及統計可由同一輸入重現。空結果需有明確行為。
-- **STOP_IF** — Prompt 與網站選取、實際讀值或來源不一致，來源缺漏，或輸出含未授權的資訊。
+- **Responsible Brain** — STUDENT-WEB Brain 負責執行與初驗，STUDENT-MAIN Brain 負責最終驗收。
+- **互動式網站** — 沿用 M3 已驗收的網站與 FD001 API，整合 Train／Test、Engine Unit、Sensor 與 Cycle 範圍選取，顯示真實 Sensor Trend 及對應 Source Records。保留 M3 已驗收成果與 FD001 Data Contract `1.0.0`。
+- **Acceptance Criteria** — 使用目前選取產生可複製的 Evidence Prompt，引用的讀值與統計須可重現並追溯至來源。交付可依命令啟動的網站及實際 Local URL，以真實瀏覽器或人工 UAT 核對畫面、API 與原始 TXT，並驗證錯誤與空結果。靜態截圖可作佐證，交付須包含可操作網站與 UAT 執行證據。
+- **STOP_IF** — `WO-M4-001` 尚未獲 MAIN Brain 驗收、Prompt 與網站選取或原始讀值不一致、來源缺漏，或輸出含未授權資訊。
 - **Next Role** — STUDENT-MAIN Brain 驗收並取得 STUDENT 核准後，派發 M5。
 
 ## M5 — END-TO-END VALIDATION AND DELIVERY
