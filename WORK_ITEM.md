@@ -314,21 +314,58 @@ STUDENT-MAIN Brain 已正式驗收 `WO-M4-002` 為 `PASS`，受驗 Commit 為 `3
 | 欄位 | 值 |
 | --- | --- |
 | WORK_ITEM_ID | `M5_END_TO_END_VALIDATION_AND_DELIVERY` |
-| STATUS | `AUTHORIZED_NOT_STARTED` |
+| STATUS | `PASS` |
 | OWNER_APPROVAL | `GRANTED` |
 | MAIN_AUTHORIZATION | `GRANTED` |
 | MAIN_ACCEPTANCE_OWNER | STUDENT-MAIN Brain |
 | WEB_SUBTASK | `M5_FD001_EVIDENCE_PROMPT_HARDENING_V1` |
-| WEB_BRAIN_STATUS | `COMMAND_DISPATCHED_FOR_PLANNING` |
-| WEB_WORKER_STATUS | `NOT_DISPATCHED` |
-| WEB_WORKER_RELEASE | `PENDING_MAIN_ACCEPTANCE_OF_WO-M5-001` |
+| WEB_WORKER_STATUS | `COMPLETED_AND_STOPPED` |
+| M5_MAIN_DECISION | `PASS` |
+| M5_WEB_PROMPT_HARDENING | `PASS` |
+| M5_FINAL_E2E | `PASS` |
+| M5_BROWSER_UAT_SUPPLEMENT | `PASS` |
+| M5_WEB_ACCEPTANCE | `PASS` |
+| M5_MAIN_ACCEPTANCE | `PASS` |
+| ACCEPTED_WEB_PROMPT_COMMIT | `ec5bb7b06235b28d4a3387681127575f55abdd57` |
+| ACCEPTED_FINAL_E2E_COMMIT | `39093a0b2c6823158ac2f72a0ce098327a370e88` |
+| ACCEPTED_BROWSER_UAT_COMMIT | `90c45cb67a521a6e9bfb67e355b7fc4eabc81c9d` |
 
 - **OBJECTIVE** — 完成最終 End-to-End Validation、既有 Evidence Prompt 強化、互動式網站驗證，以及可重現的最終交付。
 - **INPUT** — M0–M4 驗收紀錄、GitHub `main`、FD001 Data Contract `1.0.0`、M3 已驗收 API、M4 已驗收網站與 Prompt，以及學生工作區已驗證的原始資料。
 - **EXPECTED_OUTPUT** — Web 子工作驗收證據、Raw／API／UI／Prompt 比對、Browser UAT、啟動命令及已驗證的 Local URL、固定的交付 Commit、完整端到端重現步驟及最終驗收紀錄。
-- **ACCEPTANCE** — Web 子工作須完成並經 STUDENT-MAIN Brain 接受，之後才可啟動 MAIN Final E2E Work Item。最終端到端驗收、重現性查核與交付由 STUDENT-MAIN Brain 負責。
+- **ACCEPTANCE** — STUDENT-MAIN Brain 已對 `WO-M5-001`、`WO-M5-WEB-001`、`WO-M5-002` 與 `WO-M5-WEB-002` 核發 `PASS`。最終端到端驗收、重現性查核與交付由 STUDENT-MAIN Brain 負責。
 - **STOP_IF** — 治理前置條件未滿足、端到端流程無法重現、證據與來源不一致，或需要未取得的授權。
 - **RETURN_TO** — STUDENT-MAIN Brain 彙整最終結果並交付 STUDENT。
+
+### M5_TEST_EVIDENCE
+
+- **PUBLIC_EVIDENCE** — [M5 Final E2E](outputs/M5_FINAL_E2E_VALIDATION_V1/PUBLIC_SAFE/)。
+- **SUPPLEMENTAL_UAT_EVIDENCE** — [Browser UAT 補充證據](outputs/M5_FD001_BROWSER_UAT_SUPPLEMENT_V1/PUBLIC_SAFE/)。
+
+| 測試 | 驗收證據 |
+| --- | --- |
+| Backend | `WORKER_REPORTED_20_OF_20` |
+| Node | `WORKER_REPORTED_10_OF_10` |
+| Supplemental Browser | `WORKER_REPORTED_16_OF_16` |
+| Train | `WORKER_REPORTED_20_OF_20` |
+| Test | `WORKER_REPORTED_3_OF_3` |
+| Source Hash Pins | `MATCHED_M2_CONTRACT` |
+| API Errors | `WORKER_REPORTED_10_OF_10` |
+| Browser Invalid Ranges | `WORKER_REPORTED_5_OF_5` |
+| Real Backend Interruption | `WORKER_REPORTED_HTTP_502` |
+| Backend Recovery | `WORKER_REPORTED_HTTP_200` |
+| Isolated Fail-Closed | `WORKER_REPORTED_HTTP_503` |
+| Prompt | `PASS_9_OF_9` |
+| Clipboard | `PASS_BY_REVIEWED_WORKER_EVIDENCE` |
+
+### M5_NON_BLOCKING_FINDINGS
+
+- 補充 UAT 首次 Runner 回傳 exit code `1`，公開執行紀錄已說明原因，重新執行成功。
+- 瀏覽器涵蓋範圍為 Windows Edge。剪貼簿需要瀏覽器權限。
+- 重現需要已授權的私人 FD001 來源。Backend 在啟動時驗證來源，原始檔變更後需重啟驗證。
+- PNG 視覺安全查核屬 Worker 回報，MAIN 未獨立驗證。
+
+最終治理同步 `WO-M5-003` 交由 STUDENT-MAIN Brain 從 GitHub 獨立驗收。
 
 ## M5_FD001_EVIDENCE_PROMPT_HARDENING_V1
 
@@ -339,9 +376,9 @@ STUDENT-MAIN Brain 已正式驗收 `WO-M4-002` 為 `PASS`，受驗 Commit 為 `3
 | ASSIGNEE | STUDENT-WEB Brain |
 | OWNER_APPROVAL | `GRANTED` |
 | MAIN_AUTHORIZATION | `GRANTED` |
-| WEB_BRAIN_STATUS | `COMMAND_DISPATCHED_FOR_PLANNING` |
-| WEB_WORKER_STATUS | `NOT_DISPATCHED` |
-| WEB_WORKER_RELEASE | `PENDING_MAIN_ACCEPTANCE_OF_WO-M5-001` |
+| STATUS | `PASS` |
+| WEB_WORKER_STATUS | `COMPLETED_AND_STOPPED` |
+| ACCEPTED_COMMIT | `ec5bb7b06235b28d4a3387681127575f55abdd57` |
 
 - **OBJECTIVE** — STUDENT-WEB Brain 管理其 Web Own Worker，負責強化既有 Evidence Prompt、整合互動式網站及驗證 Browser UAT。
 - **INPUT** — FD001 Data Contract `1.0.0`、M3 已驗收 API、M4 已驗收 Prompt Generator、互動式網站及學生工作區已驗證的 FD001 原始資料。
@@ -365,7 +402,7 @@ Prompt 須明確要求外部 AI 區分推論與觀測事實，並禁止無證據
 
 ### M5_WEB_WORKER_RELEASE
 
-STUDENT-WEB Brain 可先規劃。派工前須由 STUDENT-MAIN Brain 從 GitHub 獨立驗收 `WO-M5-001` 為 `PASS`，再由 STUDENT-WEB Brain 核對 GitHub 最新治理文件、確認工作範圍並派遣自己的 Web Own Worker。
+STUDENT-MAIN Brain 已從 GitHub 獨立驗收 `WO-M5-001` 為 `PASS`。STUDENT-WEB Brain 管理其 Web Own Worker 的派工與交付。Web Own Worker 已完成並停止。
 
 ## 後續工作單必填欄位
 
