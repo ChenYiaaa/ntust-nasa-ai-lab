@@ -120,9 +120,19 @@ STUDENT-MAIN Brain 已對 `WO-M2-001` 核發 `PASS`，受驗 Commit 為 `9af6e6b
 | FROM | STUDENT-MAIN Brain |
 | TO | STUDENT-WEB Brain |
 | OWNER_APPROVAL | `GRANTED` |
-| STATUS | `COMMAND_DISPATCHED_TO_WEB_BRAIN` |
-| WEB_OWN_WORKER | `NOT_DISPATCHED` |
-| WEB_WORKER_RELEASE | `PENDING_MAIN_ACCEPTANCE_OF_WO-M3-001` |
+| STATUS | `PASS` |
+| WEB_DECISION | `PASS` |
+| MAIN_DECISION | `PASS` |
+| ACCEPTED_API_WORK_ITEM | `WO-M3-WEB-001` |
+| ACCEPTED_API_CORRECTION | `WO-M3-WEB-001-CORR-01` |
+| ACCEPTED_API_COMMIT | `c50495ca02814018c8f4c30ae5285c48cf9f2a99` |
+| ACCEPTED_FRONTEND_WORK_ITEM | `WO-M3-WEB-002` |
+| ACCEPTED_FRONTEND_COMMIT | `e133b92786be350eef13dff82f4ad14b90d941f0` |
+| API_STATUS | `PASS` |
+| FRONTEND_STATUS | `PASS` |
+| BROWSER_UAT_STATUS | `PASS_BY_REVIEWED_WORKER_EVIDENCE` |
+| DATA_CONTRACT_VERSION | `1.0.0` |
+| WEB_OWN_WORKER | `COMPLETED_AND_STOPPED` |
 | ACCEPTANCE_OWNER | STUDENT-MAIN Brain |
 
 ### M3_FD001_READONLY_API_REQUIREMENTS_V1
@@ -156,13 +166,61 @@ STUDENT-WEB Brain 先驗收 Web Own Worker 成果，STUDENT-MAIN Brain 負責 M3
 
 #### WEB_WORKER_RELEASE
 
-STUDENT 已正式授權 M3。Web Own Worker 目前為 `NOT_DISPATCHED`。派工須依序完成以下步驟。
+STUDENT 已正式授權 M3。Web Own Worker 已完成交付並停止。原派工程序如下，供追溯。
 
 1. 將 `WO-M3-001` 的治理變更提交至 GitHub `main`。
 2. STUDENT-MAIN Brain 從遠端獨立驗收 `WO-M3-001` 並核發 `PASS`。
 3. STUDENT-WEB Brain 重新核對 GitHub 最新治理文件。
 4. STUDENT-WEB Brain 確認其他治理阻塞均已解除。
 5. STUDENT-WEB Brain 正式派遣自己的 Web Own Worker。
+
+### M3_ACCEPTANCE_EVIDENCE
+
+| 證據 | 路徑 |
+| --- | --- |
+| API | [api.py](web/fd001/backend/api.py)、[API.md](web/fd001/docs/API.md)、[success.schema.json](web/fd001/docs/success.schema.json)、[test_api.py](web/fd001/tests/test_api.py) |
+| API PUBLIC_SAFE | [verification.md](outputs/M3_FD001_HEALTH_WEBSITE_MVP_V1/api/PUBLIC_SAFE/verification.md)、[execution.md](outputs/M3_FD001_HEALTH_WEBSITE_MVP_V1/api/PUBLIC_SAFE/execution.md) |
+| Frontend 與啟動說明 | [web/fd001/frontend/](web/fd001/frontend/) |
+| Frontend Tests | [web/fd001/frontend_tests/](web/fd001/frontend_tests/) |
+| Browser UAT | [browser-uat.md](outputs/M3_FD001_HEALTH_WEBSITE_MVP_V1/frontend/PUBLIC_SAFE/browser-uat.md) |
+
+| 檢查 | 驗收紀錄 |
+| --- | --- |
+| API REGRESSION | `WORKER_REPORTED_20_OF_20` |
+| FRONTEND TESTS | `WORKER_REPORTED_4_OF_4` |
+| BROWSER UAT GROUPS | `WORKER_REPORTED_9_OF_9` |
+| TRAIN API PARITY | `WORKER_REPORTED_20_OF_20` |
+| TEST API PARITY | `WORKER_REPORTED_3_OF_3` |
+| UNCAUGHT JAVASCRIPT EXCEPTIONS | `WORKER_REPORTED_0` |
+| JSON Schema | `PASS` |
+| Source Provenance | `PASS` |
+| Read-only Boundary | `PASS` |
+
+### M3_ACCEPTANCE_LIMITATIONS
+
+1. MAIN Brain 未直接重新執行學生本地私人 FD001 TXT。
+2. MAIN Brain 未親自操作學生 Windows 環境中的 Edge。
+3. Browser UAT 的 PASS 依據為 GitHub 可查核程式、公開報告與 Worker 執行證據。
+4. 瀏覽器涵蓋範圍限於已測試的 Edge Desktop 與 375 px 窄視窗。
+5. 本地原始檔變更後，須重啟服務才會重新驗證來源快照。
+6. 私人逐筆比對證據保留於學生本地的 Git 忽略目錄，公開證據未刊載完整來源數值。
+
+### M3_FINAL_ACCEPTANCE_RECORD
+
+- **STUDENT-WEB Brain / STUDENT-MAIN Brain** — `PASS` / `PASS`。
+- **API Accepted SHA** — `c50495ca02814018c8f4c30ae5285c48cf9f2a99`。
+- **Frontend Accepted SHA** — `e133b92786be350eef13dff82f4ad14b90d941f0`。
+- **CANONICAL_ACCEPTANCE_RECORD** — `WO-M3-002` 通過 MAIN Brain 遠端驗收後，以 GitHub `main` 治理文件為 M3 正式最終驗收紀錄。
+
+### M4_RELEASE_CONDITION
+
+1. `WO-M3-002` 已 Commit 並 Push 至 GitHub `main`。
+2. STUDENT-MAIN Brain 已獨立驗收 `WO-M3-002` 為 `PASS`。
+3. STUDENT 正式批准 M4 階段轉換。
+4. STUDENT-MAIN Brain 核對 GitHub `main` 最新治理文件。
+5. STUDENT-MAIN Brain 正式建立 M4 工作單。
+
+上述條件成立前，M4 Worker Dispatch 為 `NOT_AUTHORIZED`。M4 與 M5 都維持 `NOT_STARTED`、`OWNER_APPROVAL: NOT_GRANTED`、`AUTHORIZATION: NOT_AUTHORIZED` 及 `DISPATCH: NOT_AUTHORIZED`。
 
 ## 後續工作單必填欄位
 

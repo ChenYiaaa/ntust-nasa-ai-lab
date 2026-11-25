@@ -53,14 +53,19 @@
 ## M3 — HEALTH ANALYSIS WEBSITE MVP
 
 - **MILESTONE** — `M3_HEALTH_ANALYSIS_WEBSITE_MVP`。
-- **Status** — `AUTHORIZED_NOT_STARTED`。
+- **Status** — `PASS`。
 - **OWNER_APPROVAL** — `GRANTED`。
 - **MAIN_BRAIN_AUTHORIZATION** — `GRANTED`。
 - **BRAIN_TO_BRAIN_WORK_ORDER** — `M3_FD001_HEALTH_WEBSITE_MVP_V1`。
 - **BRAIN_TO_BRAIN_STATUS** — `COMMAND_DISPATCHED`。
 - **ASSIGNED_BRAIN** — STUDENT-WEB Brain。
-- **WEB_WORKER_STATUS** — `NOT_DISPATCHED`。
-- **WEB_WORKER_RELEASE** — `PENDING_MAIN_ACCEPTANCE_OF_WO-M3-001`。
+- **WEB_WORKER_STATUS** — `COMPLETED_AND_STOPPED`。
+- **WEB_DECISION / MAIN_DECISION** — `PASS` / `PASS`。
+- **API_STATUS / FRONTEND_STATUS** — `PASS` / `PASS`。
+- **BROWSER_UAT_STATUS** — `PASS_BY_REVIEWED_WORKER_EVIDENCE`。
+- **ACCEPTED_API_COMMIT** — `c50495ca02814018c8f4c30ae5285c48cf9f2a99`。
+- **ACCEPTED_FRONTEND_COMMIT** — `e133b92786be350eef13dff82f4ad14b90d941f0`。
+- **DATA_CONTRACT_VERSION** — `1.0.0`。
 - **Goal** — 建立網站，讓使用者選擇 Engine Unit、Cycle 與 Sensor，查看真實感測器趨勢及資料來源。
 - **Input** — M2 已驗收的 FD001 介面、欄位索引、資料來源紀錄及授權的網站工作範圍。
 - **Deliverables** — 可啟動的網站 MVP、選取介面、感測器趨勢、來源呈現與操作驗證證據。
@@ -70,12 +75,30 @@
 - **AMENDMENT_ID** — `M3_FD001_READONLY_API_REQUIREMENTS_V1`。
 - **REQUIRED_ENDPOINTS** — `GET /api/health`、`GET /api/catalog`、`GET /api/units`、`GET /api/history`。
 - **MANDATORY_TEST_QUERY** — `/api/history?split=train&unit=1&sensor=7&start=1&end=20`。
-- **Next Role** — STUDENT-MAIN Brain 驗收並取得 STUDENT 核准後，派發 M4。
+- **Next Role** — 等待 STUDENT-MAIN Brain 從 GitHub 遠端獨立驗收 `WO-M3-002`。通過後由 STUDENT 決定是否授權 M4。
+
+### M3_ACCEPTANCE_SUMMARY
+
+- **API** — 四個 FD001 唯讀端點通過驗收。
+- **Frontend** — Train／Test 分割、動態 Unit、Sensor 1–21 與 Cycle 範圍選取均通過驗收。Sensor 趨勢圖、資料品質統計與來源追溯均通過驗收。
+- **互動狀態** — Loading、Empty、Error 與過期回應防護均通過驗收。
+- **審查證據** — Browser UAT 證據與本地啟動說明均已審查。受驗版本與證據路徑見 [WORK_ITEM.md](WORK_ITEM.md#m3_acceptance_evidence)。
+
+### M3_ACCEPTANCE_LIMITATIONS
+
+1. MAIN Brain 未直接重新執行學生本地私人 FD001 TXT。
+2. MAIN Brain 未親自操作學生 Windows 環境中的 Edge。
+3. Browser UAT 的 PASS 依據為 GitHub 可查核程式、公開報告與 Worker 執行證據。
+4. 瀏覽器涵蓋範圍限於已測試的 Edge Desktop 與 375 px 窄視窗。
+5. 本地原始檔變更後，須重啟服務才會重新驗證來源快照。
+6. 私人逐筆比對證據保留於學生本地的 Git 忽略目錄，公開證據未刊載完整來源數值。
 
 ## M4 — EVIDENCE PROMPT GENERATION
 
 - **Status** — `NOT_STARTED`。
+- **OWNER_APPROVAL** — `NOT_GRANTED`。
 - **AUTHORIZATION** — `NOT_AUTHORIZED`。
+- **DISPATCH** — `NOT_AUTHORIZED`。
 - **Goal** — 根據網站選取條件與真實資料產生可複製、可追溯的 Evidence Prompt。
 - **Input** — M3 已驗收的選取與查詢介面、M2 的來源資訊及授權的 Prompt 格式。
 - **Deliverables** — Evidence Prompt 產生與複製功能、輸出範例及原始資料比對證據。
@@ -87,7 +110,9 @@
 ## M5 — END-TO-END VALIDATION AND DELIVERY
 
 - **Status** — `NOT_STARTED`。
+- **OWNER_APPROVAL** — `NOT_GRANTED`。
 - **AUTHORIZATION** — `NOT_AUTHORIZED`。
+- **DISPATCH** — `NOT_AUTHORIZED`。
 - **Goal** — 完成網站、資料、Evidence Prompt、GitHub 與啟動流程的整體驗收。
 - **Input** — M0 至 M4 的驗收紀錄、GitHub `main`、授權的本地資料及執行環境。
 - **Deliverables** — 啟動與驗證說明、端到端驗收紀錄、可追溯的 GitHub 交付版本及已知問題紀錄。
